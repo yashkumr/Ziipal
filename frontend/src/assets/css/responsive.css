@@ -1,0 +1,2518 @@
+@media only screen and (min-width: 320px) and (max-width:750px) {
+    .TabsContainer {
+        height: 55rem;
+    }
+    .site-header .navbar.sticky .main-menu > ul > li > a {
+        color: #fff;
+    }
+    .border_box_section {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 1px 1px 12px 1px #b8bdb8;
+        margin: 20px auto;
+        padding: 15px 0;
+    }
+    .box-sec {
+        padding: 0;
+    }
+    .adventure_section {
+        background-image: none;
+        width: 100%;
+        height: auto;
+        padding: 20px 0;
+        background-color: #7d7d7d29;
+    }
+    .main-box1 {
+        max-width: 100%;
+        border-radius: 66px;
+        background-color: rgba(255, 255, 255, .5);
+        padding: 10px 0;
+        justify-content: space-evenly;
+    }
+    .contentfor h1 {
+        font-size: 30px;
+        padding: 0;
+    }
+    .Tabs .Tab {
+        padding: 3px 20px;
+        flex-wrap: wrap;
+        display: flex;
+    }
+    .main_feature_box {
+        display: block;
+    }
+    .caution_section{
+        padding-top: 220px;
+    } 
+    .image-box {
+        margin: 8px 0px;
+        border: 1px solid #00000040;
+        padding: 8px;
+        height: auto;
+        border-radius: 5px;
+    }
+    .heading-feature {
+        font-size: 27px;
+        padding-top: 20px;
+        padding-bottom: 5px;
+    }
+    .content-stay {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
+        padding-left: 0rem;
+    }
+    .content-stay h2 {
+        font-size: 28px;
+    }
+    .content-stay p {
+        font-size: 16px;
+        padding: 0px 0;
+    }
+    .site-header .navbar.sticky .menu-click {
+        border: none;
+        border-radius: 2px;
+        margin-top: 0px;
+    }
+    .menu-click {
+        border: none !important;
+        cursor: pointer;
+        display: inline-block;
+        position: static;
+        padding: 7px 4px;
+        border-radius: 5px;
+        right: 10px;
+        top: -60px;
+        -webkit-transition: all 0.34s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transition: all 0.34s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        z-index: 9999;
+    }
+    .menu-click img{
+        border-radius: 6px;
+    }
+    .booking-flight_area img {
+        margin-top: 112px;
+    }
+    .btn-partner {
+        color: white !important;
+        font-weight: 600;
+        font-size: 10spx;
+        padding: 0px 5px;
+        background-color: #198754;
+        transition: 2s;
+        border-radius: 6px;
+        position: absolute;
+        top: 91%;
+        left: 70%;
+    }
+    .partner-head h2 {
+        color: #fff;
+        font-size: 19px;
+        font-weight: bold;
+    }
+    .partner-head P {
+        color: #fff;
+        line-height: 1.2;
+        font-size: 11px;
+    }
+    .Tabs {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .search {
+        margin-left: 16px;
+        margin-top: 5px;
+    }
+    .blog_content {
+        padding: 0px 0 10px 0;
+    }
+    .heading h1 {
+        font-size: 25px;
+    }
+    .my-5 {
+        margin-top: 1rem !important;
+    }
+    .our-vision {
+        height: auto;
+    }
+    .heading h2 {
+        padding: 10px 0;
+        font-size: 22px;
+    }
+    .useful_link {
+        margin: 0 10px;
+    }
+    .modal-body {
+        width: 100%;
+    }
+    .modal-content {
+        height: auto;
+    }
+    .about-us {
+        margin-top: 112px;
+    }
+    .TabsContainer .TabsContent .TabContent {
+        background: #73b7dd0d;
+        min-width: 100%;
+        padding: 10px;
+        width: 100%;
+        box-shadow: none;
+    }
+    .form_icon {
+        padding: 5px;
+    }
+    .padding_forcontent {
+        padding: 15px;
+    }
+    #formbtn {
+        bottom: 0px;
+        right: 5px;
+    }
+    .blog_content h2 {
+        font-size: 30px;
+        padding-top: 45px;
+    }
+    .reg {
+        padding: 5px 8px;
+        border-radius: 5px;
+        background-color: #198754;
+        font-size: 13px;
+    }
+    .jobs {
+        padding: 5px 8px;
+        font-size: 13px;
+        background-color: #2196F3;
+        border-radius: 5px;
+        color: white;
+    }
+    .logo img {
+        height: auto;
+        width: 100px;
+    }
+    .middle_bar_for_phone {
+        display: flex;
+        padding: 5px 0px;
+    }
+    .apply_phone {
+        background-color: green;
+        padding: 2px 9px;
+        border-radius: 4px;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        margin: 0 auto;
+        max-width: 100px;
+        color: white !important;
+    }
+    .last_numbar{
+        background-color: green;
+        padding: 2px 6px;
+        border-radius: 7px;
+    }  
+    .last_numbar a {
+        color: rgb(255, 255, 255);
+        font-size: 13px;
+    }
+    .last_numbar i {
+        color: rgb(255, 255, 255);
+    }
+    .top_social_media{
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
+    .box_area{
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (min-width: 750px) and (max-width:991px) {
+    .partner-head h2{
+        color: #fff;
+        font-size: 18px;
+    }
+    .caution_section{
+        padding-top: 180px;
+    } 
+    .partner-head P{
+        color: #fff;
+        line-height: 1.2;
+        font-size: 11px;
+    }
+}
+
+/***********
+=======================================
+    RESPONSIVE CODE START  
+=======================================
+***********/
+
+/***************
+ Code In Shineairways Travel Website  
+***************/
+
+@media screen and (min-width:1520px) {
+    /***** Custom Container *****/
+    .container-new {
+        padding: 0 15px;
+        max-width: 1480px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    /******* flight-list page *********/
+    .flights-accordion-active-box {
+        width: 56.5%;
+        right: 12%;
+    }
+}
+
+@media screen and (max-width: 1820px) {
+    /******* flight-list page *********/
+    .flights-accordion-active-box {
+        right: 9.70%;
+        width: 60.10%;
+    }
+}
+
+@media screen and (max-width: 1779px) {
+    /******* flight-list page  ********/
+    .flights-accordion-active-box {
+        right: 2.4%;
+        width: 71.1%;
+    }
+}
+
+@media screen and (max-width: 1519px) {
+     /******* flight-list page ********/
+    .flights-accordion-active-box {
+        right: 4.8%;
+        width: 67.3%;
+    }
+}
+
+@media screen and (max-width: 1399px) {
+
+    /** <<<<<<<< home page start >>>>>>>> **/
+    
+    /** //// Form Area Search tabs start //// **/
+    .flight-Search-box {
+        padding-left: 8px;
+    }
+    .flight-Search-box input {
+        font-size: 15px;
+        width: 85%;
+    }
+    .border-box-section-content {
+        max-width: 1120px;
+    }
+    .flight-search-hotels-popup {
+        height: 320px;
+    }
+    .flight-search-cars-popup, .flight-search-cars-pick-popup, .flight-search-cars-drop-popup {
+        height: 260px;
+    }
+    .flight-search-cruise-popup, .flight-search-cruise-line-popup {
+        height: 260px;
+    }   
+    .range-plan-icon i {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    /** ////  hotel and car tab button - guest and time box popup start  //// **/
+    .dropdown_passenger_area .dropdown-passenger-popup.show {
+        transform: translate(-23%, 40px) !important;
+    }
+    .dropdown-passenger-wrapper .passengers h6, .dropdown-passenger-wrapper .cabin-selection h6 {
+        font-size: 19px;
+        line-height: 24px;
+        margin-bottom: 4px;
+    }
+    .dropdown-passenger-wrapper .passengers .passengers-types .passengers-type .text .count {
+        position: static;
+        background-color: transparent;
+        margin-right: 10px;
+        font-size: 22px;
+    }
+    .dropdown-passenger-wrapper .passengers .passengers-types .passengers-type .text .type-label p {
+        font-size: 16px;
+        padding-top: 2px;
+    }
+    .dropdown-passenger-wrapper .passengers .passengers-types .passengers-type .button-set button {
+        font-size: 14px;
+        width: 28px;
+        height: 28px;
+    }
+    /** ////  hotel and car tab button - guest and time box popup end  //// **/
+
+    /** ////  oneway - roundtrip - bus ( tab ) passenger box popup start  //// **/
+    .dropdown_passenger_area .dropdown-passenger-box.show {
+        transform: translate(-42%, 50px) !important;
+    }
+    /** ////  oneway - roundtrip - bus ( tab ) passenger box popup end  //// **/
+    
+    .best-price-image {
+        height: 300px;
+    }
+    .package-wrapper h2 {
+        font-size: 21px;
+        line-height: 28px;
+    }
+    .package-content-box p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .package-wrapper a {
+        padding: 12px 20px;
+        font-size: 16px;
+        line-height: 20px
+    }
+    /*//// Form Area Search tabs end ////*/
+
+    /** <<<<<<<< home page end >>>>>>>> **/
+
+    /**** flight-list page start  ****/
+    .searchBar-heading h6 {
+        font-size: 20px;
+    }
+    .searchBar-heading p {
+        font-size: 15px;
+    }
+    .searchBar-clear-btn a {
+        font-size: 16px;
+    }
+    .flight-price-range-box-wrapper  {
+        padding: 15px 18px 25px;
+    }
+    .flight-price-range-box-heading  h2 {
+        font-size: 20px;
+        margin-bottom: 0;
+    }
+    .flight-price-range-input {
+        margin: 20px 0 25px;
+    }
+    .price-field-text {
+        font-size: 16px;
+    }
+    .flight-price-field input {
+        font-size: 16px;
+        margin-left: 7px;
+    }
+    .searchBar-stop-heading h6, .searchBar-preferred-heading h6 {
+        font-size: 20px;
+    }
+    .searchBar-text label {
+        font-size: 16px !important;
+    }
+    .searchBar-preferred-heading a, .preferred-box-text {
+        font-size: 16px;
+    }
+    
+    /** ////  All Flight Lists  //// **/
+    .flight-card-logo {
+        width: 35px;
+    }
+    .flight-card-name {
+        font-size: 20px;
+    }
+    .flight-card-timeline {
+        font-size: 17px;
+    }
+    .flight-card-run-line div {
+        font-size: 14px;
+    }
+    .flight-card-departure {
+        padding: 3px 12px;
+    }
+    .flight-card-departure, .flight-card-date {
+        font-size: 15px;
+    }
+    .flight-card-price {
+        font-size: 20px;
+    }
+    .flight-big-card-price {
+        font-size: 28px;
+    }
+    .flight-big-card-button a {
+        padding: 0px 14px 0px 14px;
+    }
+    /****  flight-list page end  ****/
+
+    /****  about us page start  ****/
+    .feature-section {
+        padding: 60px 0;
+    }
+    .about-heading h1 {
+        font-size: 32px;
+        line-height: 38px;
+    }
+    .about-content-text h2 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    .about-content-text p, .our-vision p {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .our-vision {
+        min-height: 580px;
+    }
+    /****  about us page end  ****/
+
+    /****  contact page css start  ****/
+    .contact-form-new {
+        max-width: 1100px;
+    }
+    .contact-card {
+        height: 220px;
+    }
+    .contact-detail-text a {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    .contact-detail-heading {
+        font-size: 22px;
+        line-height: 28px;
+        margin-bottom: 8px;
+    }
+    .contact-detail-address {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .contact-detail-icon {
+        font-size: 26px;
+    }
+    /****  contact page css end  ****/   
+    .flight-oneway-journey-date input {
+        width: 100%;
+    }
+    .flight-cancel-update-middle-4-reshu {
+        margin: 12px 0 !important;
+    }
+    .hotel-list-image-box {
+        width: 240px;
+        height: 180px;
+    }
+    /****  hotel checkout page start  ****/
+    .hotel-review-pageback-box {
+        font-size: 15px;
+    }
+    .hotel-review-heading h6 {
+        font-size: 26px;
+    }
+    .hotel-review-address span {
+        font-size: 15px;
+    }
+    .hotel-review-img-small {
+        height: 164px;
+    }
+    /****  hotel checkout page end  ****/
+}
+
+@media screen and (max-width: 1199px) {
+    
+    /** <<<<<<<< home page start >>>>>>>> **/
+
+    /** ////  header start  //// **/
+    .head-login {
+        width: 75%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin: 5px 0;
+    }
+    .head-login .btn-login {
+        padding: 4px 10px;
+    }
+    .main-menu ul.show {
+        padding: 10px 20px;
+    }
+    /** ////  header end  //// **/
+    
+    /** ////  form area css  //// **/
+    .border-box-section-content {
+        max-width: 920px;
+    }
+    .fine-adventure-heading h1 {
+        font-size: 32px;
+    }
+    .fine-adventure-heading p {
+        font-size: 24px;
+    }
+
+    /** ////  Form Area Search tabs start  //// **/
+    .flight-Search-box {
+        margin-bottom: 0px;
+    }
+    .flight-search-from-poppup, .flight-search-to-poppup {
+        height: 410px;
+    }
+    .flight-roundtrip-journey-date {
+        width: 112px;
+    }
+    .flight-roundtrip-journey-date p {
+        font-size: 16px;
+    }
+    .flight-roundtrip-journey-date input {
+        font-size: 15px;
+        width: 90%;
+    }
+
+    /** ////  hotel and car tab button - guest and time box popup start  //// **/    
+    .dropdown_passenger_area .dropdown-passenger-popup.show {
+        transform: translate(-35%, 40px) !important;
+    }
+    .dropdown_passenger_area .dropdown-passenger-popup {
+        padding: 10px 15px;
+    }
+    .dropdown-passenger-wrapper .passengers .passengers-types .passengers-type .text .type-label p {
+        font-size: 15px;
+        padding-top: 0px;
+    }
+    .dropdown-passenger-wrapper .passengers .passengers-types .passengers-type .text .type-label span {
+        font-size: 14px;
+        padding-top: 0;
+    }
+    .dropdown-passenger-wrapper .passengers .passengers-types .passengers-type .text .count {
+        margin-right: 8px;
+        font-size: 20px;
+    }
+    .dropdown-passenger-wrapper .cabin-selection {
+        padding-top: 5px;
+        border-top: 2px solid #c7c7cc;
+        margin-top: 1px;
+    }
+    .dropdown-passenger-wrapper .passengers h6, .dropdown-passenger-wrapper .cabin-selection h6 {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 0px;
+    }
+    .dropdown-passenger-wrapper .cabin-selection .cabin-list button,
+    .dropdown-passenger-wrapper .cabin-selection .cabin-list button input {
+        font-size: 15px;
+        line-height: 20px;
+    }
+    /** ////  hotel and car tab button - guest and time box popup end  //// **/
+
+    /** ////  oneway - roundtrip - bus ( tab ) passenger box popup start  //// **/
+    .dropdown_passenger_area .dropdown-passenger-box.show {
+        transform: translate(-52%, 50px) !important;
+    }
+    /** ////  oneway - roundtrip - bus ( tab ) passenger box popup end  //// **/
+    
+    /**** Form Area Search tabs end ****/
+
+    .best-price-box {
+        gap: 10px;
+    }
+    .best-price-box-heading span {
+        font-size: 17px;
+        line-height: 22px;
+    }
+    .best-price-image {
+        height: 250px;
+    }
+    .package-wrapper h2 {
+        font-size: 17px;
+        line-height: 24px;
+    }
+    .package-content-box p {
+        font-size: 15px;
+        line-height: 23px;
+    }
+    /** <<<<<<<< home page end >>>>>>>> **/
+
+    /**** flight-list page start ****/
+    .flights-accordion-active-box {
+       right: 4%;
+       width: 92%;
+    }
+    /**** flight-list page end ****/
+
+    /**** one way page start ****/
+    .flights-oneway-box-detail span {
+        font-size: 16px;
+    }
+    .flights-oneway-box-logo {
+        width: 35px;
+    }
+    .flights-name-oneway {
+        font-size: 18px;
+    }
+    .flights-name-oneway-font {
+        font-size: 14px;
+    }
+    .flight-cancel-update-head {
+        font-size: 15px !important;
+    }
+    /**** one way page end ****/
+    
+    /**** about us page start ****/
+    .carousel-item-new img {
+        height: 320px;
+    }
+    .feature-section {
+        padding: 50px 0;
+    }
+    .image-box-new {
+        height: 100px;
+    }
+    .journey-text {
+        padding: 0px;
+    }
+    .image-box-new:hover img  {
+        transform: scale(1.1);
+    }    
+    .about-heading h1 {
+        font-size: 30px;
+    }
+    .about-content-text p, .our-vision p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .founder-img img {
+        height: auto;
+    }
+    .our-vision h3 {
+        font-size: 22px;
+        line-height: 28px;
+        margin-bottom: 0px;
+    }
+    .our-vision {
+        min-height: 540px;
+    }
+    /**** about us page end ****/
+
+    /**** carrer page end ****/
+    .carrer-opt-point hr {
+        display: none;
+    }
+    .carrer-journey-point > span {
+        width: 49%;
+    }
+    .carrer-journey-point-2 > span, .carrer-journey-point-4 > span, .carrer-journey-point-5 > span {
+        width: 100%;
+    }
+    .carrer-journey-point-6 > span {
+        width: 90%;
+    }
+    .carrer-shine-box-img {
+        height: 310px;
+    }
+    .carrer-shine-box-img img  {
+        height: 100%;
+    }
+    /**** carrer page end ****/
+
+    /**** contact page css start ****/
+    .contact-heading h2 {
+        padding: 12px 0;
+        font-size: 34px;
+    }
+    .contact-text-new h2 {
+        font-size: 28px;
+    }
+    .contact-form-new {
+        max-width: 920px;
+    }
+    .contact-card {
+        height: 200px;
+    }
+    .contact-detail-text a {
+        font-size: 15px;
+        line-height: 22px;
+    }
+    .contact-detail-heading {
+        font-size: 20px;
+        line-height: 26px;
+        margin-bottom: 6px;
+    }
+    .contact-detail-address {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .contact-detail-icon {
+        font-size: 24px;
+    }
+    /**** contact page css end ****/
+
+    /**** franchise page css start ****/
+    .franchise-partner-heading h2 {
+        font-size: 28px;
+    }
+    .franchise-partner-heading p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .why-cont-box {
+        height: 230px;
+        padding: 8px;
+    }
+    .why-cont-box h4 {
+        font-size: 19px;
+    }
+    .why-cont-box p {
+        line-height: 24px;
+    }
+    .trav_agency_hh {
+        color: #fff;
+    }
+    .franchise-found-text h1 {
+        font-size: 26px;
+    }
+    .franchise-found-text p {
+        line-height: 26px;
+    }
+    .why-cont-heading h2 {
+        font-size: 28px;
+        line-height: 40px;
+        letter-spacing: 0.6px;
+    }
+    /**** franchise page css end ****/
+
+    /**** check out page css start ****/
+    .flight-checkout-details h6 {
+        font-size: 18px;
+    } 
+    .flight-checkout-box-detail span {
+        font-size: 16px;
+    }
+    .flight-checkout-box-name div:nth-child(1) {
+        font-size: 20px;
+        line-height: 24px;
+    }  
+    .flight-checkout-box-name  div:nth-child(2) {
+        font-size: 16px;
+        line-height: 20px;
+    }  
+    .flight-checkout-box-font {
+        font-size: 16px;
+    }
+    .flight-checkout-heading h6 {
+        font-size: 18px;
+    }  
+    .checkout-from-check label {
+        font-size: 16px !important;
+    }  
+    .flight-checkout-heading p {
+        font-size: 17px;
+        line-height: 22px;
+    }  
+    .flight-checkout-boxes-list li {
+        font-size: 17px;
+    }  
+    .checkout-contact-from-box input, label {
+        font-size: 16px !important;
+    }       
+    /**** check out page css end ****/
+
+    /**** hotel list page start ****/
+    .hotel-list-filter-searchBar-head h6 {
+        font-size: 20px;
+    }
+    .hotel-list-filter-searchBar-clear a, .hotel-list-filter-searchBar-subhead h6, .hotel-list-filter-searchBar-subhead h5 {
+        font-size: 16px;
+    }
+    .hotel-list-nav .nav-item .nav-link, .hotel-list-rating-number {
+        font-size: 13px !important;
+        line-height: 16px;
+    }
+    .hotel-list-image-box {
+        width: 180px;
+        height: 160px;
+    }
+    .hotel-list-heading h6 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .hotel-list-sub-heading p {
+        margin-bottom: 5px;
+    }
+    .hotel-list-rate-star i, .hotel-list-booking-detail span {
+        font-size: 13px;
+    }
+    .hotel-list-rating-name  {
+        font-size: 15px !important;
+    }
+    .hotel-list-price {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .hotel-list-rating-box p {
+        font-size: 16px;
+    }
+    /**** hotel list page end ****/
+
+    /**** academy page start ****/
+    .academy-course-content {
+        padding-top: 12px;
+    }
+    /**** academy page end ****/
+
+    /**** FAQ page css start ****/
+    .faqs-call-area-new {
+        padding: 25px 10px;
+    }
+    .faq-question {
+        font-size: 16px;
+    }
+    /**** FAQ page css start ****/
+
+    /**** footer page css start ****/
+    .footer-field h2 {
+        font-size: 22px;
+    }
+    .footer-field p {
+        line-height: 24px;
+        font-size: 15px;
+    }
+    /**** footer page css end ****/
+}
+
+@media screen and (max-width: 991px) {
+
+    /** <<<<<<<< home page start >>>>>>>> **/
+
+    /** //// header start //// **/
+    .head-login {
+        width: 70%;
+    }
+    .head-login .btn-login {
+        padding: 3px 9px;
+    }
+    /** //// header end //// **/
+
+    .fine-adventure-heading h1 {
+        font-size: 32px;
+        letter-spacing: 3px;
+    }
+    .fine-adventure-heading p {
+        font-size: 26px;
+    }
+
+    /** //// form area css //// **/
+    .theme-search-form-area-tabRow .nav-tabs .nav-item {
+        border: 1px solid #2196F3;
+        padding: 0 15px;
+    }
+    .tab-search-btn {
+        font-size: 18px;
+        border-radius: 10px 10px 10px 10px;
+        line-height: 32px;
+        height: 45px;
+        max-width: 100px;
+    }
+
+    /** //// Form Area Search tabs start //// **/
+    .flight-Search-box {
+        border-radius: 0px !important;
+        margin-bottom: 10px;
+    }
+    .top_form_search_button {
+        height: 55px !important;
+    }
+    .flight-search-from-poppup, .flight-search-to-poppup {
+        left: -5%;
+        height: 395px;
+    }
+    .flight-search-cars-popup, .flight-search-cars-pick-popup, .flight-search-cars-drop-popup {
+        height: 245px;
+    }
+    .flight-search-cruise-popup, .flight-search-cruise-line-popup {
+        height: 240px;
+    }
+    .flight-roundtrip-journey-date {
+        width: 130px;
+    }
+    .flight-roundtrip-journey-date p {
+        font-size: 17px;
+    }
+    .flight-roundtrip-journey-date input {
+        font-size: 17px;
+        width: 95%;
+    }
+
+    /** //// hotel and car tab button - guest and time box popup start //// **/    
+    .dropdown_passenger_area .dropdown-passenger-popup.show {
+        transform: translate(-4%, 40px) !important;
+    }
+    .dropdown-passenger-popup .dropdown-passenger-wrapper {
+        position: static;
+    }
+    /** //// hotel and car tab button - guest and time box popup end //// **/    
+
+    /** //// oneway - roundtrip - bus ( tab ) passenger box popup start  //// **/
+     .dropdown_passenger_area .dropdown-passenger-box.show {
+        transform: translate(-27%, 40px) !important;
+    }
+    /** //// oneway - roundtrip - bus ( tab ) passenger box popup end  ///// **/
+
+    /** //// Form Area Search tabs end //// **/
+
+    /** //// box section start  //// **/
+    .border-box-section-content {
+        row-gap: 30px;
+    }
+    .best-price-box {
+        gap: 10px;
+    }
+    .best-price-box-heading span {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    /** //// box section end //// **/
+
+    .border-box-section-content {
+        max-width: 720px;
+    }
+    .box-area-new {
+        min-height: 230px;
+    }
+    .content-stay-new {
+        padding-bottom: 1rem;
+    }
+    .content-stay-new h2 {
+        font-size: 25px;
+        font-weight: 600;
+    }
+    .content-stay-new p {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        padding: 2px 0;
+    }
+    .content-stay-new p br {
+        display: none;
+    }
+    .best-price-image {
+        height: 300px;
+    }
+    .package-wrapper h2 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    /** <<<<<<<< home page end >>>>>>>> **/
+
+    /**** flight-list page start *****/
+    .carousel-item-new img {
+        height: 250px;
+    }
+    .flights-accordion-active-box {
+        right: 4%;
+        width: 92%;
+    }
+    .inclsn {
+        flex-wrap: wrap;
+    }
+    /**** flight-list page end  ****/
+
+    /**** one way page start *****/
+    .flight-modal-header h5 {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+    .flight-modal-header button {
+        font-size: 18px;
+        margin-top: 20px !important;
+    }
+    .flight-modal-heading  h5 {
+        font-size: 15px;
+    }
+    .flight-modal-image-box {
+        width: 50px;
+        height: 35px;
+    }
+    /**** one way page start ****/
+     
+    /**** about us page start ****/
+    .feature-section {
+        padding: 40px 0;
+    }
+    .our-vision {
+        min-height: 800px;
+        padding: 10px;
+    }
+    .image-box-new {
+        height: 80px;
+        margin: 0 4px;
+    }
+    .image-box-new img  {
+        width: 100px;
+    }
+    .about-subscribe-content h3 {
+        font-size: 28px;
+    }
+    .subscribe-content-btn button {
+        text-align: center;
+    }
+    .founder-image {
+        width: 75%;
+        margin: 0 auto;
+        height: 320px;
+    }
+    .about-heading h1 {
+        font-size: 28px;
+    }
+    .about-content-text h2 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+    .founder-image img {
+        height: 100%;
+    }
+    /**** about us page end ****/
+
+    /**** carrer page start ****/
+    .carrer-journey-text h2 {
+        font-size: 24px;
+    }
+    .carrer-founder-img img {
+        height: 300px;
+    }
+    /**** carrer page end ****/
+
+    /**** contact page css start ****/
+    .contact-heading h2 {
+        padding: 10px 0;
+        font-size: 28px;
+    }
+    .contact-text-new h2 {
+        font-size: 24px;
+    }
+    .contact-form-new {
+        max-width: 720px;
+    }
+    .contact-card {
+        margin: 0 !important;
+        height: 220px;
+    }
+    .contact-detail-text {
+        text-align: center;
+    }
+    .contact-detail-text a {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .contact-detail-heading {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 4px;
+    }
+    .contact-detail-address {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .contact-detail-icon {
+        font-size: 20px;
+    }
+    /**** contact page css end ****/
+
+    /****  academy page css start ****/
+    .academy-card-image img {
+        height: 220px;
+    }
+    .academy-card-content p {
+        line-height: 24px;
+    }
+    .academy-heading {
+        font-size: 22px;
+    }
+    .academy-journey-text h2 {
+        font-size: 22px;
+    }
+    .academy-benefit-heading h1 {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    .academy-benefit-box p {
+        font-size: 17px;
+        line-height: 26px;
+    }
+    .academy-course-heading h1 {
+        font-size: 28px;
+        line-height: 38px;
+        margin-bottom: 0px;
+        letter-spacing: 1px;
+    }
+    /**** academy page css end ****/
+
+    /**** franchise page start end ****/
+    .why-cont-box {
+        height: 280px;
+    }
+    .franchise-sub-box h3 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+    .franchise-partner-heading h2 {
+        font-size: 21px;
+    }
+    .franchise-partner-heading p {
+        font-size: 16px;
+    }
+    .franchise-found-text h1 {
+        font-size: 24px;
+        letter-spacing: 0.5px;
+    }
+    .franchise-found-text p {
+        line-height: 24px;
+        font-size: 17px;
+    }
+    .why-cont-heading h2 {
+        font-size: 26px;
+        line-height: 36px;
+        letter-spacing: 0.3px;
+    }
+    /**** franchise page css end ****/
+    
+    /**** FAQ page css start ****/
+    .faqs-call-area-new {
+        width: 480px;
+        margin: 0 auto;
+    }     
+    /**** FAQ page css start ****/
+
+    /**** services page css start ****/
+    .service-box-new {
+        height: 180px;
+    }
+    /**** services page css start ****/
+
+    /**** hotel list page start ****/
+    .hotel-list-filter-searchBar {
+        padding: 20px 20px 0 20px;
+    }
+    /**** hotel list page end ****/
+
+    /**** hotel checkout page start ****/
+    .hotel-review-heading h6 {
+        font-size: 24px;
+    }
+    .hotel-review-address span {
+        font-size: 14px;
+    }
+    .hotel-review-location  {
+        display: none;
+    }
+    .hotel-review-img-small {
+        height: 120px;
+    }
+    .hotel-review-about h6 {
+        font-size: 22px;
+    }
+    .hotel-review-about p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .hotel-review-roomOption-box1-room-type, .hotel-review-roomOption-box1-room-select, .hotel-review-roomOption-box1-price-range {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .hotel-review-roomOption-box1-type h4, .hotel-review-roomOption-box2-option h4, .hotel-review-roomOption-box3-price h4 {
+        font-size: 18px;
+    }
+    .hotel-review-roomOption-box1-image {
+        height: 180px;
+    }
+    .hotel-review-facility-point h5, .hotel-review-policies-point h5 {
+        font-size: 20px;
+    }
+    .hotel-review-facility-point h6, .hotel-review-policies-point h6 {
+        font-size: 15px;
+    }
+    .hotel-review-amenities-box p {
+        font-size: 14px;
+    }
+    .hotel-review-time-box {
+        font-size: 16px;
+    }
+    .hotel-review-policie-lines p {
+        font-size: 14px;
+    }
+    /**** hotel checkout page end ****/
+
+    /**** footer page css start ****/
+    .footer-field p {
+        line-height: 23px;
+        font-size: 14px;
+    }
+    .ft-img img {
+        width: 160px;
+    }
+    /**** footer page css end ****/
+}
+
+@media screen and (max-width: 767px) {
+
+    /** <<<<<<<< home page start >>>>>>>> **/
+    
+    /** //// header start //// **/
+    .head-login {
+        width: 60%;
+    }
+    /** //// header end //// **/
+
+    /**** form area css ****/
+    .border-box-section-content {
+        max-width: 520px;
+    }
+    .premium-packages-heading {
+        padding-top: 0 !important;
+    } 
+    .content-stay-qr img {
+        height: 230px;
+    }
+
+    /**** Form Area Search tabs start ****/
+    .flight-search-from-poppup, .flight-search-to-poppup {
+        left: 0%;
+    }
+    .flight-search-hotels-popup {
+        height: 305px;
+    }
+    .flight-search-bus-from-popup, .flight-search-bus-to-popup {
+        width: 100%;
+        left: 0%;
+        top: 90%;
+    }
+    .theme-search-form-area-tabRow .nav-tabs .nav-item {
+        padding: 0 10px;
+        margin-bottom: 10px;
+        height: 34px;
+    }
+    .theme-search-form-area-tabRow .nav-tabs .nav-link.active {
+        border-bottom-width: 3px;
+    }
+    .theme-search-form-area-tabRow .nav-tabs .nav-link img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    /** //// hotel and car tab button - guest and time box popup start //// **/    
+    .dropdown_passenger_area .dropdown-passenger-popup.show {
+        transform: translate(33%, 40px) !important;
+    }
+    /** //// hotel and car tab button - guest and time box popup end //// **/    
+
+    /** //// oneway - roundtrip - bus ( tab ) passenger box popup start //// **/
+     .dropdown_passenger_area .dropdown-passenger-box.show {
+        transform: translate(0%, 110px) !important;
+        min-width: 310px !important;
+        height: auto;
+    }
+    .dropdown-passenger-content {
+        position: static;
+        left: 0;
+        top: 0;
+        padding: 4px;
+        width: 100%;
+    }
+    .passengers-type-new {
+        width: auto;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+        gap: 2px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
+    .passenger-head {
+        width: 100%;
+    }
+    .passenger-count {
+        width: 100%;
+    }
+    .passenger-cabin-list {
+        gap: 6px;
+    }
+    .passenger-cabin-list button {
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .dropdown_passenger_area .dropdown-passenger-box.show {
+        width: 310px;
+    }
+    /** //// oneway - roundtrip - bus ( tab ) passenger box popup end //// **/
+    
+    /** //// box section start //// **/
+    .border-box-section-content {
+        box-shadow: none;
+    }
+    /** //// box section end //// **/
+    
+    /** //// Form Area Search tabs end //// **/
+
+    .border-box-section-content {
+        max-width: 100%;
+    }
+    .best-price-image {
+        height: 440px;
+    }
+    .top_form_search_button {
+        height: 60px !important;
+    }
+    /** <<<<<<<< home page end >>>>>>>> **/
+
+    /**** flight-list page start ****/
+    .flight-active-update-btn-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .flight-big-card-button a {
+        height: 40px;
+    }
+    .flight-big-card-price {
+        font-size: 24px;
+    }
+    .flights-accordion-active-box {
+        right: 2%;
+        width: 96%;
+    }
+    .flights-accordion-active-box-main {
+         padding-top: 0px;
+    }
+    /**** flight-list page end ****/
+      
+    /**** about us page start ****/
+    .about-subscribe-content h3 {
+        font-size: 24px;
+    }
+    .image-box-new {
+        height: 110px;
+        width: 80%;
+        margin: 15px auto;
+    }
+    .image-box-new img  {
+        width: 100%;
+    }
+    .our-vision {
+        min-height: 240px;
+        padding: 10px;
+    }
+    .founder-image {
+        height: 280px;
+    }
+    /**** about us page end ****/
+    
+    /**** carrer page start ****/
+    .carrer-journey-text h2 {
+        font-size: 22px;
+    }
+    .carrer-founder-img img {
+        height: 260px;
+    }
+    .carrer-shine-box-img {
+        height: 320px;
+    }
+    .carrer-shine-box-img img  {
+        height: 100%;
+    }
+    /**** carrer page end ****/
+
+    /**** contact page css start ****/
+    .contact-heading h2 {
+        padding: 10px 0;
+        font-size: 22px;
+    }
+    .contact-text-new h2 {
+        font-size: 20px;
+    }
+    .contact-form-new {
+        max-width: 520px;
+    }
+    .contact-card {
+        height: 200px;
+        margin-top: 20px !important;
+    }
+    .contact-detail-text a {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .contact-detail-heading {
+        font-size: 22px;
+        line-height: 26px;
+        margin-bottom: 4px;
+    }
+    .contact-detail-address {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .contact-detail-icon {
+        font-size: 24px;
+    }
+    /**** contact page css end ****/
+
+    /**** academy page css start *****/
+    .academy-card {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .academy-card-image img {
+        height: 280px;
+    }
+    .academy-card-content p {
+        line-height: 28px;
+    }
+    .academy-heading {
+        font-size: 18px;
+    }
+    .academy-journey-text {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+    .academy-course-content {
+        width: 500px;
+        margin: 0 auto;
+        padding-top: 0px;
+    }
+    .academy-course-image {
+        padding-bottom: 0px !important;
+    }
+    .academy-course-image img {
+        height: 280px;
+    }
+    .academy-benefit-heading h1 {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    .academy-benefit-box {
+        width: 500px;
+    }
+    /**** academy page css end ****/
+    
+    /**** franchise page css start ****/
+    .franchise-partner-heading h2 {
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+    .franchise-partner-heading p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+    .franchise-found-text h1 {
+        font-size: 20px;
+        letter-spacing: 0px;
+        margin-bottom: 0px;
+    }
+    .why-cont-box {
+        height: 180px;
+        padding: 10px;
+    }
+    .trav_agency_hh {
+        color: #fff;
+    }
+    .partner-bg {
+        margin-top: 130px;
+    }
+    /**** franchise page css end ****/
+
+    /**** FAQ page css start ****/
+    .faqs-call-area-new {
+        padding: 25px 10px;
+    }
+    .faq-question {
+        padding-right: 42px;
+    }
+    /**** FAQ page css start ****/
+
+    /**** check out page css start ****/
+    .flight-checkout-details h6 {
+        font-size: 16px;
+    }
+    .flight-checkout-box-detail span {
+        font-size: 15px;
+    }
+    .flight-checkout-box-name div:nth-child(1) {
+        font-size: 18px;
+        line-height: 20px;
+    }
+    .flight-checkout-box-name div:nth-child(2) {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .flight-checkout-box-logo {
+        width: 35px;
+    }
+    .flight-checkout-box-font {
+        font-size: 14px;
+    }
+    .flight-checkout-heading h6 {
+        font-size: 17px;
+    }
+    .flight-checkout-heading p {
+        font-size: 15px;
+        line-height: 20px;
+    }
+    .checkout-from-check label {
+        font-size: 14px !important;
+    }
+    .flight-checkout-boxes-list li {
+        font-size: 14px;
+    }
+    .checkout-contact-from-box input, label {
+        font-size: 15px !important;
+    }
+    .flight-cancel-update-head {
+        font-size: 13px !important;
+    } 
+    .flight-cancel-update-middle-4-reshu {
+        margin: 11px 0 !important;
+    }
+    .flight-checkout-reshedule-head a {
+        font-size: 16px;
+    }
+    /**** check out page end ****/
+
+    .tab-content-main {
+        margin-top: 33px;
+    }
+    
+    /**** hotel list page start ****/
+    .hotel-list-section {
+        padding-bottom: 35px;   
+    }
+    .hotel-list-nav .nav-item .nav-link {
+        font-size: 13px !important;
+        line-height: 16px;
+        padding: 6px !important
+    }
+    .hotel-list-left-content {
+        flex-wrap: wrap;
+    }
+    .hotel-list-image-box {
+        width: 100%;
+        height: 220px;
+    }
+    .hotel-list-price-main-box {
+        width: 100%;
+    }
+    .hotel-list-price-box {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        margin-bottom: 10px;
+    }
+    .hotel-list-rate-star i, .hotel-list-booking-detail span {
+        font-size: 12px;
+        display: inline-block;
+    }
+    .hotel-list-offer-box {
+        margin-top: 15px;
+    }
+    .hotel-list-price-btn {
+        margin-top: -45px;
+        justify-content: flex-end;
+    }
+    .hotel-list-filter-map {
+        justify-content: flex-end;
+        display: flex;
+        align-items: flex-end;
+        width: 100%;
+        margin-top: -30px;
+        margin-bottom: 10px;
+    }
+    .hotel-list-quality-filter-bar {
+        width: 100%;
+    }
+    /**** hotel list page end ****/
+
+    /**** hotel checkout page end ****/
+    .hotel-review-heading h6 {
+        font-size: 20px;
+    }
+    .hotel-review-pageback-box a {
+        font-size: 13px;
+    } 
+    .hotel-review-address span {
+        font-size: 13px;
+    }
+    .hotel-review-address a svg {
+        width: 18px;
+        height: 20px;
+    }
+    .hotel-review-img-big, .hotel-review-img-small {
+        border-radius: 0px;
+    }
+    .hotel-review-img-big {
+        height: 252px;
+    }
+    .hotel-review-img-big img  {
+        height: 100%;
+    }
+    .hotel-review-about h6 {
+        font-size: 20px;
+        margin-bottom: 6px;
+        margin-top: -10px;
+    }
+    .hotel-review-about p {
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 6px;
+    }
+    .hotel-review-roomOption-box1-type h4, .hotel-review-roomOption-box2-option h4, .hotel-review-roomOption-box3-price h4 {
+        font-size: 16px;
+    }
+    .hotel-review-price-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        height: 100%;
+        width: 100%;
+    }
+    .hotel-reviw-menu-wrapper ul li a {
+        font-size: 16px;
+    }
+    .hotel-review-facility-point h5, .hotel-review-policies-point h5 {
+        font-size: 18px;
+    }
+    .hotel-review-amenities-box  {
+        width: calc(33.33% - 5.33px);
+    }
+    /**** hotel checkout page end ****/
+
+}
+
+@media screen and (max-width: 575px) {
+
+    /** <<<<<<<< home page start >>>>>>>> **/
+
+    /** ////  header start //// **/
+    .top-main_class {
+        justify-content: space-between;
+    }
+    .top_social_media i {
+        padding: 0px 2px;
+        font-size: 16px;
+    }
+    .middle_bar {
+        line-height: 24px;
+        padding-left: 20px;
+    }
+    .middle_bar .apply {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+    .last_numbar{
+        padding: 0px 5px;
+        border-radius: 4px;
+        line-height: 24px;
+    }
+    .last_numbar a {
+        font-size: 12px;
+        line-height: 16px;
+    }
+    .last_numbar a i {
+        font-size: 10px;
+    }
+    .logo {
+        padding: 0;
+        margin: 0;
+    }
+    .logo img {
+        width: 110px !important;
+    }
+    .menu-click {
+        padding: 0px;
+    }
+    .menu-click img {
+        width: 47px;
+    }
+    .head-login {
+        width: 50%;
+    }
+    .head-login .btn-login {
+        padding: 2px 8px;
+        line-height: 24px;
+        font-size: 13px;
+    }
+    .main-menu ul.show {
+        padding: 10px 0;
+    }
+    .main-menu ul li a {
+        font-size: 15px;
+        line-height: 22px;
+        padding: 6px 16px;
+    }
+    /** ////  header end //// **/
+    
+    /* Form Area start  
+    ============================================ 
+    */
+    #theme_search_form {
+        margin-top: 35px !important;
+        margin-bottom: 30px;
+    }
+    .theme-search-form-area-tabRow .nav-tabs .nav-item {
+        padding: 0 6px;
+        margin-bottom: 10px;
+        height: 34px;
+        margin-right: 5px;
+    }
+    .flight-Search-box {
+        margin-bottom: 10px;
+        border-radius: 0px !important;
+    }
+    .flight-Search-box p {
+        padding-top: 8px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .tab-content-main {
+        margin-top: 0px;
+    }
+    .theme_search_form_tabbtn {
+        margin-bottom: 0px;
+        padding-left: 0px;
+    }
+    .theme_search_form_area {
+        margin-top: 6px !important;   
+    }
+    .tab-search-btn {
+        height: 40px;
+        margin-bottom: 3px;    
+    }
+    .flight-search-from-poppup, .flight-search-to-poppup {
+        width: 320px;
+        height: 350px;
+    }
+    .flight-search-poppup-heading p, .recent-search-flight-details P {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .recent-search-icon, .hotel-current-icon span, .hotel-dest-icon span, .flight-search-cars-icon span, .bus-popup-icon span, .flight-search-cruise-icon span {
+        width: 40px;
+        height: 40px;
+    }
+    .recent-search-flight-details span {
+        font-size: 13px;
+        line-height: 17px;
+    }
+    .fare-box-new {
+        flex-wrap: wrap;
+        margin-top: -15px;
+    }
+    .fare-box-new p {
+        width: 100%;
+    }
+    .form-check {
+        padding-left: 34px !important;
+    }
+    .flight-categories-search-tabRow .nav-tabs .nav-link {
+        padding: 2px 12px;
+        font-size: 15px;
+    }
+    
+    /** //// hotels //// **/
+    .flight-search-hotels-popup {
+        width: 100%;
+    }
+    .flight-search-hotels-popup {
+        height: 280px;
+    }
+    .hotel-current-icon span {
+        border-radius: 8px;
+    }
+    .hotel-current-text h4, .flight-search-cars-text h6 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .hotel-dest h3 {
+        font-size: 20px;
+        line-height: 28px;
+        padding: 8px 0
+    }
+    .hotel-dest-icon span svg {
+        width: 22px;
+    }
+    .hotel-dest-name p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    /** //// car //// **/
+    .flight-search-cars-popup, .flight-search-cars-pick-popup, .flight-search-cars-drop-popup {
+        width: 320px;
+        height: 190px;
+    }
+    .flight-search-cars-icon span i {
+        font-size: 18px;
+    }
+    /** //// bus //// **/
+    .bus-popup-icon span svg {
+        width: 22px;
+        height: 22px;
+    }
+    .bus-popup-text h6 {
+        font-size: 16px;
+    }
+    .flight-search-bus-from-popup, .flight-search-bus-to-popup {
+        height: 205px;
+    }
+    .flight-search-bus-content {
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+    /** //// curise //// **/
+    .flight-search-cruise-icon span i {
+        font-size: 17px;
+    }
+    .flight-search-cruise-text h6 {
+        font-size: 15px;
+        line-height: 24px;
+    }
+    .flight-search-cruise-popup, .flight-search-cruise-line-popup {
+        height: 170px;
+    }
+
+    /** //// hotel and car tab button - guest and time box popup start //// **/    
+    .dropdown_passenger_area .dropdown-passenger-popup.show {
+        transform: translate(-4%, 105px) !important;
+        min-width: 320px;   
+    }
+    /** //// hotel and car tab button - guest and time box popup end //// **/    
+
+    /* Form Area end  
+    ============================================
+    */
+    .card-new p {
+        font-size: 15px;
+        line-height: 22px;
+        font-weight: 400;
+    }
+    .box-area-new {
+        width: 90%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .box-area-new p {
+        font-family: 'Roboto', sans-serif;
+    }
+    .premium-packages-heading, .premium-packages-heading span {
+        font-size: 24px !important;
+    }
+    .card-new {
+        width: 85% !important;
+        margin: 0 auto;
+    }
+    .premium-btn {
+        font-size: 14px;
+        letter-spacing: 0.30px;
+    }
+    .fine-adventure-heading {
+        padding-top: 40px;
+    }
+    .fine-adventure-heading h1 {
+        font-size: 22px;
+        margin-bottom: 4px;
+        letter-spacing: 0.5px;
+    }
+    .fine-adventure-heading p {
+        font-size: 18px;
+    }
+    .top-service-box {
+        width: 85%;
+        margin: 30px auto 0 auto;
+    }
+    .our-blog-heading h2 {
+        padding-top: 0;
+        margin-bottom: 0;
+    }
+    .our-blog-heading h2 span {
+        font-size: 25px;
+    }
+    .best-price-image {
+        height: 230px;
+    }
+    /** <<<<<<<< home page end >>>>>>>> **/
+
+    /**** flight-list page start ****/
+    .searchBar-heading h6 {
+        font-size: 18px;
+    }
+    .searchBar-heading p {
+        font-size: 14px;
+    }
+    .searchBar-clear-btn a {
+        font-size: 15px;
+    }
+    .flight-price-range-box-wrapper {
+        padding: 16px 10px 20px;
+    }
+    .flight-price-range-input {
+        margin: 12px 0 18px;
+    }
+    .flight-price-field {
+        height: 36px !important;
+    }
+    .searchBar-stop-heading h6, .searchBar-preferred-heading h6 {
+        font-size: 18px;
+    }
+    .searchBar-text label {
+        font-size: 14px !important;
+    }
+    .searchBar-preferred-heading a, .preferred-box-text {
+        font-size: 14px;
+    }
+    .form-check {
+        min-height: 0.5rem;
+        padding-left: 1.3rem;
+    }
+    /**** flight-list page end ****/
+
+    /**** one way page start ****/
+    .flights-oneway-box-detail span {
+        font-size: 14px;
+    }
+    .flight-oneway-booking-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+    }
+    .flight-oneway-booking-box .flight-button-wrap button {
+        padding: 5px 12px;
+        height: 40px;
+    }
+    .flights-oneway-box-detail span {
+        font-size: 14px;
+    }
+    .flights-name-oneway {
+        font-size: 16px;
+    }
+    .flights-name-oneway-font {
+        font-size: 13px;
+    }
+
+    /** //// modal popup //// **/ 
+    .modal-tabs-content {
+        padding: 8px;
+    }
+    .flight-modal-header h5 {
+        font-size: 18px;
+        margin-top: 0px;
+    }
+    .flight-modal-header button {
+        font-size: 14px;
+        margin-top: 0px !important;
+    }
+    .modal-header .btn-close {
+        padding: 4px 4px;
+        margin: 0px;
+    }
+    .modal-tabs-nav ul li {
+        font-size: 13px;
+        line-height: 14px;
+        border-radius: 0px;
+    }
+    .modal-tabs-nav ul li.modal-tab-active {
+        border-bottom: 3px solid #068eff;
+    }
+    .modal-tabs-nav ul li a {
+        padding: 8px 4px 12px 4px;
+        font-size: 13px;
+    }
+    .modal-tabs-nav ul li.modal-tab-active a {
+        padding: 8px 4px 8px 4px;
+    }
+    .flight-modal-luggage-detail {
+        padding-top: 8px;
+        border-top: 2px solid #b8bdb8;
+    }
+    .flight-modal-luggage-detail-box p {
+        font-size: 13px;
+    }
+    .price-footer h5 {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .flight-modal-btn {
+        padding: 8px 12px;
+    }
+    .flight-cancel-update-head {
+        font-size: 16px !important;
+    }
+    .flight-cancel-line-2 {
+        margin-right: 0px !important;
+    }
+    .flight-cancel-line-3 {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+    .flight-cancel-line-4 {
+        margin-left: -40px !important;
+    }
+    .flight-details-terms p {
+        font-size: 15px;
+        line-height: 20px;
+        font-family: 'Roboto';
+        margin-bottom: 6px;
+    }
+    .flight-cancel-update-middle-2 {
+        margin: 14px 0 2px 0px !important;
+    }
+    .flight-cancel-update-middle-3 {
+        margin: 0px !important;
+    }
+    .flight-cancel-update-middle-4 {
+        margin: -4px 0px 0px 0px !important;
+    }
+    .flight-cancel-update-middle-4-reshu {
+        margin: -9px 0px 0px 0px !important;
+    }
+    .flight-checkout-reshedule-head a {
+        font-size: 14px;
+    }
+    .check-main-section {
+        padding-bottom: 30px;
+    }
+    /**** one way page end ****/
+
+    /**** about us page start ****/
+    .carousel-item-new img {
+        height: 160px;
+    }
+    .about-box-border {
+        width: 93%;
+    }
+    .about-founder-img img {
+        height: 180px;
+    }
+    .about-subscribe-content {
+        width: 320px;
+        margin: 0 auto;
+    }
+    .about-subscribe-content h3 {
+        font-size: 18px;
+        padding: 0;
+    }
+    .about-form-control {
+        margin: 0;
+    }
+    .about-heading h1 {
+        font-size: 26px;
+    }
+    .about-content-text p, .our-vision p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+    .about-content-text h2 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .founder-image {
+        width: 100%;
+    }
+    /**** about us page end ****/
+
+    /**** carrer page start ****/
+    .carrer-journey-text h2 {
+        font-size: 22px;
+        line-height: 30px;
+        font-weight: 500;
+    }
+    .carrer-founder-img img {
+        height: 180px;
+        padding-top: 0px;
+    }
+    .carrer-box-border {
+        width: 92%;
+        margin: 0 auto;
+    }
+    .carrer-shine-box-img {
+        height: 200px;
+    }
+    .carrer-shine-box-img img  {
+        height: 100%;
+    }
+    .carrer-journey-point > span {
+        width: 100%;
+    }
+    .carrer-journey-table button {
+        padding: 4px 16px;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+    }
+    /**** carrer page end ****/
+
+    /**** contact page start ****/
+    .contact-heading h2 {
+        padding: 5px 0;
+        font-size: 20px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .contact-text-new h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 0px;
+    }
+    .contact-form-new {
+        max-width: 90%;
+    }
+    .contact-location {
+        max-width: 90%;
+        height: 460px;
+    }
+    .contact-location h1 {
+        margin-top: 16px;
+        font-size: 19px;
+        font-weight: 600;
+    }
+    .contact-card {
+        width: 95%;
+        margin: 10px auto !important
+    }
+    .contactus-form input {
+        margin-bottom: 0px;
+    }
+    /**** contact page end ****/
+
+    /**** academy page start ****/
+    .academy-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .academy-heading, .academy-para {
+        text-align: center;
+    }
+    .academy-para {
+        line-height: 24px;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        margin: 0 auto;
+        width: 95%;
+    }
+    .academy-journey-text {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .academy-journey-text h2 {
+        font-size: 19px;
+        font-weight: 600;
+    }
+    .academy-journey-text p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .academy-journey-text ul {
+        padding-left: 0;
+    }
+    .academy-journey-text a {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .academy-card-image img {
+        height: 240px;
+    }
+    .academy-course-heading h1 {
+        font-size: 26px;
+        line-height: 32px;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 0px;
+        font-weight: 600;
+        margin-bottom: 0px;
+    }
+    .academy-course-content, .academy-benefit-box {
+        width: 86%;
+    }
+    .academy-course-image img {
+        height: 200px;
+    }
+    .academy-benefit-heading h1 {
+        font-size: 20px;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 6px;
+        letter-spacing: 0px;
+    }
+    .academy-benefit-heading h6 {
+        font-size: 17px;
+        line-height: 26px;
+    }
+    .academy-card-content h6 {
+        font-size: 17px;
+        line-height: 26px;
+    }
+    .academy-card-content p {
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+    }
+    .journey-text h6 {
+        font-size: 16px;
+    }
+    .academy-benefit-box p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    /**** academy page end ****/
+    
+    /**** franchise page start ****/
+    .franchise-found-text h1 {
+        font-size: 17px;
+    }
+    .franchise-found-text p {
+        line-height: 22px;
+        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+    }
+    .franchise-found-box {
+        text-align: center;
+    }
+    .why-cont-box {
+        width: 95%;
+        height: 200px;
+        margin: 0 auto;
+    }
+    .franchise-sub-box {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .franchise-sub-box h3 {
+        font-size: 20px;
+        margin-bottom: 0;
+        line-height: 24px;
+        font-weight: 500;
+    }
+    .franchise-slider-heading h1 {
+        font-weight: 600;
+    }
+    .franchise-sub-box-input > .form-control {
+        margin-bottom: 0px;
+    }
+    .partner-bg {
+        margin-top: 110px;
+    }
+    .franchise-partner-heading h2 {
+        font-size: 18px;
+    }
+    .franchise-partner-heading a {
+        margin-bottom: 0px !important;
+        font-size: 13px;
+        line-height: 18px;
+        padding: 4px 8px;
+    }
+    .why-cont-heading h2 {
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: 0px;
+    }
+    .franchise-trav-box h3 {
+        padding: 0px;
+        font-size: 18px;
+    }
+    .franchise-trav-box i {
+        font-size: 38px;
+    }
+    /**** franchise page end ****/
+
+    /**** hotel checkout page start ****/
+    .hotel-review-pageback-box {
+        font-size: 12px;
+    }
+    .hotel-review-heading h6 {
+        font-size: 18px;
+    }
+    .hotel-review-address span {
+        font-size: 12px;
+    }
+    .hotel-review-about p {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 0px;
+    }
+    .hotel-review-price-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .hotel-reviw-menu-wrapper ul li a {
+        font-size: 14px;
+    }
+    .hotel-review-roomOption-box1-image {
+        height: 200px;
+    }
+    .hotel-review-price-content {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    } 
+    .hotel-review-amenities-box {
+        width: 100%;
+    }
+    .hotel-review-time-box {
+        font-size: 14px;
+    }
+    .hotel-review-img-big {
+        height: 180px;
+    }
+    /**** hotel checkout page start ****/
+
+    /**** FAQ page start ****/
+    .faqs-call-area-new {
+        width: 80%;
+    }     
+    .faqs-call-area-new img {
+        width: 65px;
+    }
+    .faqs-call-area-new  h3 {
+        font-size: 20px;
+        padding: 2px 0;
+        margin-bottom: 0;
+    }
+    /**** FAQ page start ****/
+
+    /**** content stay page start ****/
+    .content-stay-new p {
+        line-height: 23px;
+        font-family: 'Roboto', sans-serif;
+    }
+    .content-stay-qr img {
+        width: 220px;
+    }
+    /**** content stay page end ****/
+
+    /**** hotel list page start ****/
+    .hotel-list-filter-searchBar {
+        padding: 10px 10px 0 10px;
+    }
+    .hotel-review-sec {
+        margin-top: 100px;
+    }
+    /**** hotel list page end ****/
+
+    /**** Register Now Page Start ****/  
+    .register-now-detail p {
+        font-size: 18px !important;
+        line-height: 28px;
+    }
+    .register-now-from-page input, .register-now-from-page select {
+        margin-bottom: 8px;
+    }
+    .register-seat h2 {
+        font-size: 22px;
+        line-height: 32px;
+        letter-spacing: 0px;
+    }
+    .register-now-from-page label {
+        font-size: 17px !important;
+    }
+    /**** Register Now Page End ****/  
+
+    /**** Refund Policy page start ****/
+    .refund-policy h2 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+    .refund-policy p {
+        font-size: 15px;
+        line-height: 22px;
+    }
+    .refund-policy ul li {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    /**** Refund Policy page end ****/
+
+    /**** Airlines page start ****/
+    .indigo-flight-points p, .spicejet-flight-points p, .air-india-flight-point p {
+        margin: 0px;
+       font-family: 'Roboto', sans-serif; 
+    }
+    .flights-list-item p {
+        line-height: 28px;
+    }
+    /**** Airlines page end ****/
+
+    /**** job apply now form page start ****/
+    .job-from-heading h2 {
+        font-size: 24px;
+    }
+    .job-apply-terms-cond {
+        text-align: center;
+    }
+    .job-apply-terms-cond-heading p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .job-apply-refund-policy-heading ol, .job-apply-terms-cond-heading ol {
+        padding: 0px;
+    }
+    .job-apply-terms-cond-heading h2, .job-apply-refund-policy-heading h2 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+    .job-apply-refund-policy-heading ol li, .job-apply-terms-cond-heading ol li {
+        gap: 6px;
+        padding: 0px;
+        line-height: 24px;
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+    .terms-condition h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .terms-condition p {
+        line-height: 24px;
+    }
+    /**** job apply now form page end ****/
+
+    /**** footer page start ****/
+    .footer-field h2  {
+        font-size: 19px;
+        line-height: 26px;
+    }
+    .footer-field p:nth-child(2) {
+        font-size: 15px;
+        line-height: 20px;
+    }
+    .footer-field p {
+        line-height: 20px;
+    }
+    .visa-sec img {
+        height: 26px;
+    }
+    .footer-last-text p {
+        font-size: 13px;
+    }
+    .footer_link li {
+        line-height: 24px;
+    }
+    .ft-img img {
+        width: 140px;
+    }
+    .call-icon i {
+        font-size: 24px;
+        line-height: 22px;
+    }
+    .float {
+        width: 54px;
+        height: 54px;
+        right: 22px;
+        border-radius: 50%;
+      }
+    /**** footer page end ****/
+}
+
+/**********
+=======================================
+    RESPONSIVE CODE END  
+=======================================
+**********/
