@@ -5,6 +5,7 @@ export const registerController = async (req, res) => {
     try {
         const { name, number, email, password, cpassword } = req.body;
         
+        
         //validations
         if (!name) {
             return res.send({ message: "Name is Required" });
@@ -43,6 +44,7 @@ export const registerController = async (req, res) => {
             email,
             password: hashedPassword,
         }).save();
+       
         res.status(200).send({
             success: true,
             message: "User Register Successfully",

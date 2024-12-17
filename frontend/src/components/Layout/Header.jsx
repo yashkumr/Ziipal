@@ -8,7 +8,7 @@ const Header = () => {
             <div>
                 <div className="site-header">
                     {/* top header */}
-                    <div className="top-header">
+                    {/* <div className="top-header">
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="top-main_class">
@@ -28,11 +28,9 @@ const Header = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div class="middle_bar_for_phone">
-         <a href="apply_now.php" class="apply_phone">Apply Jobs</a>
-      </div> */}
+                           
                         </div>
-                    </div>
+                    </div> */}
                     {/* end top header */}
                     {/* nav start  */}
                   

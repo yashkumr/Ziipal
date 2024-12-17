@@ -290,13 +290,16 @@ button:after,
   border-color: #24963e;
 }
 .btn-danger {
+  padding: 8px;
+  text-align: center;
+  border-radius: 0px;
   color: #fff !important;
-  background: #dc3545;
-  border-color: #dc3545;
+  background: #2d617f;
+  /* border-color: #dc3545; */
 }
 .btn-danger:hover {
-  background: #c6303e;
-  border-color: #c6303e;
+  background: rgb(208, 112, 2);
+  /* border-color: #c6303e; */
 }
 .btn-warning {
   color: #fff !important;
