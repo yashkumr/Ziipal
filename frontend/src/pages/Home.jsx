@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout/Layout.jsx'
 import banner1 from "../assets/images/banner/oneWayBanner1.jpg"
 import banner2 from "../assets/images/banner/mulitWayBanner1.jpg"
@@ -9,6 +9,7 @@ import hotelTabbtn from "../assets/images/icon/hotel-tabbtn-image.png"
 import carTabbtn from "../assets/images/icon/car-tabbtn-image.png"
 import busTabbtn from "../assets/images/icon/bus-tabbtn-image-1.png"
 import cruiseTabbtn from "../assets/images/icon/cruise-tabbtn-image.png"
+import visa from "../assets/images/icon/travel-insurance-tabbtn-image.png"
 import watch from "../assets/images/icon/watch.png"
 import bali from "../assets/images/flights/bali.jpg"
 import goa from "../assets/images/flights/goa.jpg"
@@ -19,10 +20,24 @@ import Farecation from '../components/Layout/Farecation.jsx'
 import { NavLink } from 'react-router-dom'
 import zuberLogo from "../assets/images/icon/zuberLogo.jpg"
 import { FaExchangeAlt } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
+
+
 
 
 
 const Home = () => {
+  // State to manage the toggle
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Function to handle the toggle
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
+
+
+
   return (
     <>
       <Layout>
@@ -57,10 +72,10 @@ const Home = () => {
 
 
             <div className="logo1">
-              <NavLink to="#"> <img src="https://promos.makemytrip.com/Growth/Images/1x/mmt_dt_top_icon.png" /> </NavLink>
+              <NavLink to="#"> <img src="https://turkven.com/files/content/zuber-logo-fococlipping-standard_96685.png" /> </NavLink>
             </div>
 
-            <div className="search1  rounded pb-5 mt-5">
+            <div className="search1  rounded">
 
               <section id="theme_search_form theme-search-form-new">
                 <div className=" container-new" style={{ width: "96%", margin: "auto" }}>
@@ -99,11 +114,12 @@ const Home = () => {
                                 Bus
                               </button>
                             </li>
-                            {/* <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation">
                               <button class="nav-link" id="apartments-tab" data-bs-toggle="tab"
-                                  data-bs-target="#apartments" type="button" role="tab" aria-controls="apartments"
-                                  aria-selected="false"><i class="fas fa-building"></i> Visa</button>
-                          </li> */}
+                                data-bs-target="#apartments" type="button" role="tab" aria-controls="apartments"
+                                aria-selected="false">                                <img className="tabbtn-img-box" style={{ width: 60, height: 55 }} src={visa} alt />
+                                Visa</button>
+                            </li>
                             <li className="nav-item" role="presentation">
                               <button className="nav-link" id="cruise-tab" data-bs-toggle="tab" data-bs-target="#cruise" type="button" role="tab" aria-controls="cruise" aria-selected="false">
                                 {/* <i class="fas fa-ship"></i> */}
@@ -725,8 +741,8 @@ const Home = () => {
                                               {/* <span>Business</span> */}
                                             </div>
                                           </div>
-                                          <div className="top_form_search_button p-0 col-lg-1" style={{ height: 70 }}>
-                                            <a href="flight-list.html" className="btn btn_theme btn_md tab-search-btn">Search
+                                          <div className="top_form_search_button p-0 col-lg-1" >
+                                            <a href="#" className=" tab-search-btn">Search
                                               {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
                                             </a>
                                           </div>
@@ -1330,9 +1346,11 @@ const Home = () => {
                                           {/* <span>Day/Night</span> */}
                                         </div>
                                       </div>
-                                      <div className="top_form_search_button p-0 col-lg-1" style={{ height: 70 }}>
-                                        <button className="btn btn_theme btn_md tab-search-btn">Search</button>
-                                      </div>
+                                      <div className="top_form_search_button p-0 col-lg-1" >
+                                            <a href="#" className=" tab-search-btn">Search
+                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                            </a>
+                                          </div>
                                     </div>
                                   </form>
                                 </div>
@@ -1527,11 +1545,11 @@ const Home = () => {
                                           {/* <span>Luxary Rooms</span> */}
                                         </div>
                                       </div>
-                                      <div className="top_form_search_button p-lg-0 px-3 col-lg-1" style={{ height: 70 }}>
-                                        <a href="hotel-list.html" className="btn btn_theme btn_md tab-search-btn">Search
-                                          {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
-                                        </a>
-                                      </div>
+                                      <div className="top_form_search_button p-0 col-lg-1" >
+                                            <a href="#" className=" tab-search-btn">Search
+                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                            </a>
+                                          </div>
                                     </div>
                                   </form>
                                 </div>
@@ -1908,9 +1926,11 @@ const Home = () => {
                                                 {/* <span>Business</span> */}
                                               </div>
                                             </div>
-                                            <div className="top_form_search_button p-0 col-lg-1" style={{ height: 70 }}>
-                                              <button className="btn btn_theme btn_md tab-search-btn">Search</button>
-                                            </div>
+                                            <div className="top_form_search_button p-0 col-lg-1" >
+                                            <a href="#" className=" tab-search-btn">Search
+                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                            </a>
+                                          </div>
                                           </div>
                                         </div>
                                       </div>
@@ -2104,9 +2124,11 @@ const Home = () => {
                                           </div>
                                         </div>
                                       </div>
-                                      <div className="top_form_search_button p-0 col-lg-1" style={{ height: 70 }}>
-                                        <button className="btn btn_theme btn_md tab-search-btn">Search</button>
-                                      </div>
+                                      <div className="top_form_search_button p-0 col-lg-1" >
+                                            <a href="#" className=" tab-search-btn">Search
+                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                            </a>
+                                          </div>
                                     </div>
                                   </form>
                                 </div>
@@ -2122,17 +2144,26 @@ const Home = () => {
 
             </div>
 
-            <div className="icons1 m-0 p-0 ">
-              <ul className='userSection pushRight m-0 p-0'>
 
-                <li className='makeFlex'>
+
+            <div className="icons1 m-0 p-0 ">
+
+              {/* Toggle Button */}
+
+              <button className="toggle-button" onClick={toggleNavbar}>
+                {isOpen ? <div> <RxCross2 /></div> : <div className="menu-div"><GiHamburgerMenu /></div>}
+              </button>
+
+              <ul className={`userSection pushRight m-0 p-0  ${isOpen ? "active1" : " "}`} >
+
+                <li className='makeFlex '>
                   <span className="landingSprite listYourPropertyIcon mx-1"> </span>
                   <div className='makeFlex flexOne column font10'>
                     <p className='font11'>List Your Property</p>
                     <p className='userPerText '>Grow Your Business !</p>
                   </div>
                 </li>
-                <li className='makeFlex myBizIntro'>
+                <li className='makeFlex myBizIntro '>
                   <span className="landingSprite lis myBizIcon mx-1"> </span>
                   <div className='makeFlex flexOne column font10'>
                     <p className='font11'>List Your Property</p>

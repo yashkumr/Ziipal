@@ -4,6 +4,7 @@ import { requireSignIn } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+
 //registerRoute
 router.post("/register", registerController);
 
@@ -18,8 +19,5 @@ router.get("/user-auth", requireSignIn, (req, res)=>{
 router.get("/admin-auth", requireSignIn, (req, res)=>{
     res.status(200).send({ ok : true});
 })
-
-
-
 
 export default router;

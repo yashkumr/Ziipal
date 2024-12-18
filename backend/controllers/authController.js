@@ -1,6 +1,7 @@
 import { comparePassword, hashPassword } from "../helper/authHelper.js";
 import userModel from "../models/userModel.js";
 
+
 export const registerController = async (req, res) => {
     try {
         const { name, number, email, password, cpassword } = req.body;
