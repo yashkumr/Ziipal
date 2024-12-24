@@ -1,39 +1,122 @@
 import React, { useState } from 'react'
+import axios from "axios"
 import Layout from '../components/Layout/Layout.jsx'
-import banner1 from "../assets/images/banner/oneWayBanner1.jpg"
-import banner2 from "../assets/images/banner/mulitWayBanner1.jpg"
-import banner3 from "../assets/images/banner/multiWayBanner2.jpg"
-import banner4 from "../assets/images/banner/oneWayBanner2.jpg"
 import flightsTabbtn from "../assets/images/icon/flights-tabbtn-image.png"
 import hotelTabbtn from "../assets/images/icon/hotel-tabbtn-image.png"
 import carTabbtn from "../assets/images/icon/car-tabbtn-image.png"
 import busTabbtn from "../assets/images/icon/bus-tabbtn-image-1.png"
 import cruiseTabbtn from "../assets/images/icon/cruise-tabbtn-image.png"
 import visa from "../assets/images/icon/travel-insurance-tabbtn-image.png"
-import watch from "../assets/images/icon/watch.png"
-import bali from "../assets/images/flights/bali.jpg"
-import goa from "../assets/images/flights/goa.jpg"
 import man from "../assets/images/icon/man.png"
-import { FaFantasyFlightGames, FaHotel, FaCarSide } from "react-icons/fa";
 import SlickSlider from '../components/Layout/SlickSlider.jsx'
 import Farecation from '../components/Layout/Farecation.jsx'
-import { NavLink } from 'react-router-dom'
-import zuberLogo from "../assets/images/icon/zuberLogo.jpg"
+import { NavLink, useNavigate } from 'react-router-dom'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 import { FaExchangeAlt } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 
 
-
-
-
 const Home = () => {
-  // State to manage the toggle
+
+  const [keyword, setKeyword] = useState('');
+  const [locations, setLocations] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const [dkeyword, setDkeyword] = useState('');
+  const [destinations, setDestinations] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [date, setDate] = useState(null);
+  const [travellers, setTravellers] = useState({
+    adults: 1,
+    children: 0,
+    infants: 0,
+    class: "Economy",
+  });
+
+  const navigate = useNavigate();
 
   // Function to handle the toggle
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+  // origin
+  const handleInputChange = async (event) => {
+    const value = event.target.value;
+    setKeyword(value);
+    if (value.length >= 3) {
+      try {
+        const response = await axios.get(`/api/v1/flights/locations?keyword=${value}`);
+        setLocations(response.data);
+        setShowSuggestions(true);
+
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+      }
+    }
+  };
+  const handleSuggestionClick = (location) => {
+    setKeyword(location);
+    setShowSuggestions(false);
+
+  };
+  // Destinations
+  const handleInputChange2 = async (event) => {
+    const value = event.target.value;
+    setDkeyword(value);
+
+    if (value.length >= 3) {
+
+      try {
+        const response = await axios.get(`/api/v1/flights/locations?keyword=${value}`);
+        setDestinations(response.data);
+
+        setShowSuggestions(true);
+
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+      }
+    }
+  };
+  const handleSuggestionClick2 = (location) => {
+    setDkeyword(location);
+    setShowSuggestions(false);
+
+  };
+  // Handler for date change
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate);
+  };
+  // classess
+  const handleTravellerChange = (type, value) => {
+
+    setTravellers((prev) => ({
+      ...prev,
+      [type]: value,
+    }));
+  };
+
+  const handleClassChange = (classType) => {
+
+    setTravellers((prev) => ({
+      ...prev,
+      class: classType,
+    }));
+
+  };
+
+  const handleSubmit = () => {
+    // Send the travellers data to the backend
+    console.log(travellers);
+    // Example: axios.post('/api/travel', travellers);
+
+  };
+
+
+  const handleSearch = () => {
+    navigate(`/search-results?source=${keyword}&destination=${dkeyword}&date=${date}&adults=${travellers.adults}&children=${travellers.children}&infants=${travellers.infants}&class=${travellers.class}`);
   };
 
 
@@ -41,42 +124,15 @@ const Home = () => {
   return (
     <>
       <Layout>
-        {/* Banner Start */}
-        {/* <div>
-          <div id="carouselExample" className="carousel slide" >
-            <div className="carousel-inner " style={{ height: "70vh" }}>
-
-              <div className="carousel-item active">
-                <img src={banner3} className="d-block w-100" alt="banner1" />
-              </div>
-            </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon d-none" aria-hidden="true" />
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span className="carousel-control-next-icon d-none" aria-hidden="true" />
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div> */}
-
-        {/* Banner End */}
 
 
         {/* makeMyTrip section Start */}
         <div className="makeBg noAvifSupport bgGradient">
-
-
           <div className="header1">
-
-
             <div className="logo1">
               <NavLink to="#"> <img src="https://turkven.com/files/content/zuber-logo-fococlipping-standard_96685.png" /> </NavLink>
             </div>
-
             <div className="search1  rounded">
-
               <section id="theme_search_form theme-search-form-new">
                 <div className=" container-new" style={{ width: "96%", margin: "auto" }}>
                   <div className="row">
@@ -161,196 +217,57 @@ const Home = () => {
                                 <div className="row">
                                   <div className="col-lg-12">
                                     <div className="oneway_search_form">
-                                      <form action="#!">
+                                      <form action="#!" onSubmit={handleSearch}>
                                         <div className="row">
                                           <div className="col-lg-3 col-md-6 col-sm-12 col-12 flight-search-from-content ps-lg-2 ps-md-1 ps-sm-0 ps-0 pe-sm-1 pe-0">
                                             <div className="flight_Search_boxed flight-Search-box" style={{ borderRadius: '10px 0px 0px 10px' }}>
                                               <p>From</p>
-                                              <input type="text" defaultValue="Delhi (DEL)" />
-                                              {/* <span>IGI - Indira Gandhi International...</span> */}
-                                              <div className="plan_icon_posation">
-                                                <i className="fas fa-plane-departure" />
-                                              </div>
-                                            </div>
-                                            {/* poppup modal home from box  */}
-                                            <div className="flight-search-from-poppup bg-white p-3">
-                                              <div className="row">
-                                                <div className="col-12">
-                                                  <div className="row recent-search-content gap-2 mb-3">
-                                                    <div className="flight-search-poppup-heading">
-                                                      <p>Recent Searches</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="d-flex align-items-center justify-content-center">
-                                                        <span className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                          <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                        </span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
+                                              <input type="text" value={keyword}
+                                                onChange={handleInputChange} />
 
-                                                  <div className="row gap-2">
-                                                    <div className="flight-search-poppup-heading ">
-                                                      <p>Popular Flights</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>DEL</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>New Delhi, Delhi, India.</p>
-                                                        <span>Indira Gandhi Intl Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BOM</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Mumbai, Maharashtra, India.</p>
-                                                        <span>Chatrapati Shivaji International Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>GOI</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Goa, Goa, India.</p>
-                                                        <span>Dabolim Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BLR</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Bengaluru, Karnataka, India.</p>
-                                                        <span>Kemgegowda, International, Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
+                                              {showSuggestions && (
+                                                <ul className='autoSugge-ul'>
+                                                  {locations.map((location) => (
+                                                    <>
+                                                      <li className='autoSuggestData cursor-pointer' onClick={() => handleSuggestionClick(location)}>
+                                                        <span className="p-0 m-0 text-dark cursor-pointer">{location}</span>
+                                                      </li>
+                                                    </>
+                                                  ))}
+                                                </ul>
+                                              )}
+
                                             </div>
+
+
                                           </div>
+
                                           <div className="col-lg-3 col-md-6 col-sm-12 col-12 p-0 px-0 pe-0 flight-search-to-content">
                                             <div className="flight_Search_boxed flight-Search-box">
                                               <p>To</p>
-                                              <input type="text" defaultValue="Hyderabad (HYD) " />
-                                              {/* <span>HYD, Hyderabad, India</span> */}
+                                              <input type="text" value={dkeyword} onChange={handleInputChange2} />
+
+                                              {showSuggestions && (
+                                                <ul className='autoSugge-ul'>
+                                                  {destinations.map((location) => (
+                                                    <>
+                                                      <li className='autoSuggestData cursor-pointer' onClick={() => handleSuggestionClick2(location)}>
+                                                        <span className="p-0 m-0 text-dark cursor-pointer">{location}</span>
+                                                      </li>
+                                                    </>
+                                                  ))}
+                                                </ul>
+                                              )}
                                               <div className="plan_icon_posation">
                                                 <i className="fas fa-plane-arrival" />
                                               </div>
                                               <div className="range_plan range-plan-icon " style={{ background: "#fff", borderRadius: "50%", padding: "9px", color: "skyblue" }}>
-
                                                 <FaExchangeAlt />
-
-
                                               </div>
                                             </div>
-                                            {/* poppup modal home to box  */}
-                                            <div className="flight-search-to-poppup bg-white p-3">
-                                              <div className="row">
-                                                <div className="col-12">
-                                                  <div className="row recent-search-content gap-2 mb-3">
-                                                    <div className="flight-search-poppup-heading">
-                                                      <p>Recent Searches</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="d-flex align-items-center justify-content-center">
-                                                        <span className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                          <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                        </span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div className="row gap-2">
-                                                    <div className="flight-search-poppup-heading ">
-                                                      <p>Popular Flights</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>DEL</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>New Delhi, Delhi, India.</p>
-                                                        <span>Indira Gandhi Intl Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BOM</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Mumbai, Maharashtra, India.</p>
-                                                        <span>Chatrapati Shivaji International Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>GOI</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Goa, Goa, India.</p>
-                                                        <span>Dabolim Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BLR</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Bengaluru, Karnataka, India.</p>
-                                                        <span>Kemgegowda, International, Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
+
+
+
                                           </div>
                                           <div className="col-lg-3  col-md-6 col-sm-12 col-12 p-0 px-md-1 px-0">
                                             <div className="form_search_date">
@@ -360,79 +277,108 @@ const Home = () => {
 
                                                 <div className="Journey_date">
                                                   <p>Journey date</p>
-                                                  <input type="date" defaultValue="2024-03-01" />
-                                                  {/* <span>Thursday</span> */}
+                                                  <input
+                                                    type="date"
+                                                    value={date}
+                                                    onChange={(e) => setDate(e.target.value)}
+                                                    format="DD-MM-YYYY"
+                                                  />
+
                                                 </div>
                                               </div>
                                             </div>
                                           </div>
-                                          <div className="col-lg-2 col-md-6 col-sm-12 col-12 p-0 pe-lg-1 pe-md-0 pe-sm-1 pe-0">
-                                            <div className="flight_Search_boxed dropdown_passenger_area dropdown-passenger-area-box flight-Search-box">
-                                              <p>Travellers &amp; Class</p>
+
+                                          <div className="col-lg-2  col-md-6 col-sm-12 col-12 p-0 pe-sm-1 pe-0 pe-md-0 pe-lg-1">
+
+
+                                            <div className="traveller-input-container">
+                                              <label htmlFor="traveller-input">Travellers & Class</label>
                                               <div className="dropdown">
-                                                <button className="dropdown-toggle final-count" data-toggle="dropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">1 Traveller, Economy</button>
-                                                {/*--- passenger box popup start ---*/}
-                                                <div className="dropdown-menu dropdown_passenger_info dropdown-passenger-box" aria-labelledby="dropdownMenuButton1">
-                                                  <div className="traveller-calulate-persons dropdown-passenger-content">
-                                                    <div className="passengers">
-                                                      <h5>Travellers</h5>
-                                                      <div className="passengers-types">
-                                                        <div className="passengers-type-new">
-                                                          <div className="passenger-head">
-                                                            <h6>Adults</h6>
-                                                            <span>12 yrs or above</span>
-                                                          </div>
-                                                          <div className="passenger-count">
-                                                            <span className="passenger-count-active">1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passengers-type-new">
-                                                          <div className="passenger-head">
-                                                            <h6>Adults</h6>
-                                                            <span>2 - 12 yrs</span>
-                                                          </div>
-                                                          <div className="passenger-count">
-                                                            <span className="passenger-count-active count count">0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passengers-type-new">
-                                                          <div className="passenger-head">
-                                                            <h6>Children</h6>
-                                                            <span>0 -2 yrs</span>
-                                                          </div>
-                                                          <div className="passenger-count">
-                                                            <span className="passenger-count-active">0</span><span>1</span><span>2</span><span>3</span><span>4</span>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passenger-text">
-                                                          <div className="passenger-logo">
-                                                            <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="GroupIcon" className="h-20 w-20" style={{ userSelect: 'none', display: 'inline-block' }}><path fillRule="evenodd" d="M12.7143 7.9076c0 1.3077-1.0844 2.4077-2.4717 2.4077-1.3873 0-2.4717-1.1-2.4717-2.4077C7.771 6.6 8.8553 5.5 10.2426 5.5c1.3873 0 2.4717 1.1 2.4717 2.4076Zm1.5014 0c0 2.1582-1.7788 3.9077-3.9731 3.9077s-3.9731-1.7495-3.9731-3.9077C6.2695 5.7496 8.0483 4 10.2426 4s3.9731 1.7495 3.9731 3.9076Zm2.3735 7.2162c-3.6311-3.4101-9.0438-3.4071-12.6844-.0148C2.155 16.7396 3.12 20 5.4813 20h9.5154c2.3467 0 3.3407-3.2345 1.5925-4.8762ZM4.7819 16.2579c3.1349-2.9211 7.804-2.9211 10.9262.011.8236.7735.3174 2.2282-.7114 2.2282H5.4813c-1.021 0-1.535-1.4607-.6994-2.2392Zm11.5044-3.4757c.1301-.3933.5548-.6067.9484-.4767 1.3435.4438 3.7739 1.6945 3.7739 4.3569 0 1.3963-1.0214 2.1463-2.0675 2.1463-.9682 0-.9682-1.5 0-1.5 1.7717-.4337-.8558-3.3712-2.1777-3.579a.7498.7498 0 0 1-.4771-.9475Zm-.6702-7.1478c-.9624-.0925-1.1135 1.3999-.1484 1.4927 1.9914.1915 1.767 2.9102-.2699 2.7143-.9624-.0926-1.1134 1.3998-.1484 1.4926 3.8917.3743 4.4702-5.0527.5667-5.6996Z" clipRule="evenodd" /></svg>
-                                                          </div>
-                                                          <div className="passenger-text-line">
-                                                            <h4>Planning a trip for more than 9 travellers?</h4>
-                                                            <a href="#">Create Group Booking</a>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passenger-cabin-selection">
-                                                          <h3>Class</h3>
-                                                          <div className="passenger-cabin-list">
-                                                            <button className="passenger-cabin-list-active button">Economy</button>
-                                                            <button type="button">Premium Economy</button>
-                                                            <button type="button">Business</button>
-                                                          </div>
-                                                        </div>
-                                                      </div>
+                                                <button
+                                                  className="dropdown-toggle"
+                                                  type="button"
+                                                  id="travellerDropdown"
+                                                  data-bs-toggle="dropdown"
+                                                  aria-expanded="false"
+                                                >
+                                                  {`${travellers.adults + travellers.children + travellers.infants} Travellers, ${travellers.class}`}
+                                                </button>
+                                                <div className="dropdown-menu" aria-labelledby="travellerDropdown">
+                                                  <div className="traveller-options">
+                                                    <div className="option">
+                                                      <span>Adults (12+ years)</span>
+                                                      <input
+                                                        type="number"
+                                                        min="1"
+                                                        max="9"
+                                                        value={travellers.adults}
+                                                        onChange={(e) =>
+                                                          handleTravellerChange("adults", parseInt(e.target.value, 10))
+                                                        }
+                                                      />
+                                                    </div>
+                                                    <div className="option">
+                                                      <span>Children (2-12 years)</span>
+                                                      <input
+                                                        type="number"
+                                                        min="0"
+                                                        max="9"
+                                                        value={travellers.children}
+                                                        onChange={(e) =>
+                                                          handleTravellerChange(
+                                                            "children",
+                                                            parseInt(e.target.value, 10)
+                                                          )
+                                                        }
+                                                      />
+                                                    </div>
+                                                    <div className="option">
+                                                      <span>Infants (0-2 years)</span>
+                                                      <input
+                                                        type="number"
+                                                        min="0"
+                                                        max="4"
+                                                        value={travellers.infants}
+                                                        onChange={(e) =>
+                                                          handleTravellerChange("infants", parseInt(e.target.value, 10))
+                                                        }
+                                                      />
                                                     </div>
                                                   </div>
-                                                  <div className="passenger-done-btn">
-                                                    <a href="#">Done</a>
+                                                  <div className="class-options">
+                                                    <h5>Class</h5>
+                                                    <button
+                                                      className={`class-option ${travellers.class === "Economy" ? "active" : ""
+                                                        }`}
+                                                      onClick={() => handleClassChange("Economy")}
+                                                    >
+                                                      Economy
+                                                    </button>
+                                                    <button
+                                                      className={`class-option ${travellers.class === "Premium Economy" ? "active" : ""
+                                                        }`}
+                                                      onClick={() => handleClassChange("Premium Economy")}
+                                                    >
+                                                      Premium Economy
+                                                    </button>
+                                                    <button
+                                                      className={`class-option ${travellers.class === "Business" ? "active" : ""
+                                                        }`}
+                                                      onClick={() => handleClassChange("Business")}
+                                                    >
+                                                      Business
+                                                    </button>
                                                   </div>
+                                                  <button className="done-btn" onClick={handleSubmit}>
+                                                    Done
+                                                  </button>
                                                 </div>
-                                                {/*--- passenger box popup start ---*/}
                                               </div>
-                                              {/* <span>Business</span> */}
                                             </div>
+
                                           </div>
+
                                           <div className="top_form_search_button p-0 col-lg-1" >
                                             <a href="#" className=" tab-search-btn">Search
                                               {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
@@ -482,87 +428,8 @@ const Home = () => {
                                                 <i className="fas fa-plane-departure" />
                                               </div>
                                             </div>
-                                            {/* poppup modal home from box  */}
-                                            <div className="flight-search-from-poppup bg-white p-3">
-                                              <div className="row">
-                                                <div className="col-12">
-                                                  <div className="row recent-search-content gap-2 mb-3">
-                                                    <div className="flight-search-poppup-heading">
-                                                      <p>Recent Searchs</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="d-flex align-items-center justify-content-center">
-                                                        <span className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                          <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                        </span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div className="row gap-2">
-                                                    <div className="flight-search-poppup-heading ">
-                                                      <p>Popular Flights</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>DEL</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>New Delhi, Delhi, India.</p>
-                                                        <span>Indira Gandhi Intl Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BOM</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Mumbai, Maharashtra, India.</p>
-                                                        <span>Chatrapati Shivaji International Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>GOI</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Goa, Goa, India.</p>
-                                                        <span>Dabolim Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BLR</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Bengaluru, Karnataka, India.</p>
-                                                        <span>Kemgegowda, International, Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
+
+
                                           </div>
                                           <div className="col-lg-3 col-md-6 col-sm-12 col-12 p-0 px-0 pe-0 flight-search-to-content">
                                             <div className="flight_Search_boxed flight-Search-box">
@@ -576,87 +443,7 @@ const Home = () => {
                                                 <i className="fas fa-exchange-alt" />
                                               </div>
                                             </div>
-                                            {/* poppup modal home to box  */}
-                                            <div className="flight-search-to-poppup bg-white p-3">
-                                              <div className="row">
-                                                <div className="col-12">
-                                                  <div className="row recent-search-content gap-2 mb-3">
-                                                    <div className="flight-search-poppup-heading">
-                                                      <p>Recent Searchs</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="d-flex align-items-center justify-content-center">
-                                                        <span className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                          <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                        </span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="ScheduleIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M12.7358 7.98a.75.75 0 0 0-1.5 0v4.9844c0 .1989.0791.3897.2197.5303l2.2749 2.2749a.75.75 0 0 0 1.0606 0 .75.75 0 0 0 0-1.0606l-2.0552-2.0552V7.98Z" /><path fillRule="evenodd" d="M21 12c0 4.9706-4.0294 9-9 9s-9-4.0294-9-9 4.0294-9 9-9 9 4.0294 9 9Zm-1.5 0c0 4.1421-3.3579 7.5-7.5 7.5S4.5 16.1421 4.5 12 7.8579 4.5 12 4.5s7.5 3.3579 7.5 7.5Z" clipRule="evenodd" /></svg>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>
-                                                          DEL
-                                                          <i className="fa fa-arrow-right" aria-hidden="true" />
-                                                          BOM
-                                                        </p>
-                                                        <span>Fri, 14 Jun • 6 Travellers • Economy</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div className="row gap-2">
-                                                    <div className="flight-search-poppup-heading ">
-                                                      <p>Popular Flights</p>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>DEL</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>New Delhi, Delhi, India.</p>
-                                                        <span>Indira Gandhi Intl Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BOM</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Mumbai, Maharashtra, India.</p>
-                                                        <span>Chatrapati Shivaji International Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>GOI</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Goa, Goa, India.</p>
-                                                        <span>Dabolim Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                    <div className="col-12 recent-search-content-box pb-2 pt-2 gap-3 d-flex align-items-center">
-                                                      <div className="recent-search-icon d-flex align-items-center justify-content-center">
-                                                        <span>BLR</span>
-                                                      </div>
-                                                      <div className="recent-search-flight-details">
-                                                        <p>Bengaluru, Karnataka, India.</p>
-                                                        <span>Kemgegowda, International, Airport.</span>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
+
                                           </div>
                                           <div className="col-lg-3  col-md-6 col-sm-12 col-12 p-0 px-md-1 ps-md-2 ps-lg-1">
                                             <div className="form_search_date">
@@ -674,73 +461,92 @@ const Home = () => {
                                               </div>
                                             </div>
                                           </div>
-                                          <div className="col-lg-2  col-md-6 col-sm-12 col-12 p-0 pe-sm-1 pe-0 pe-md-0 pe-lg-1">
-                                            <div className="flight_Search_boxed dropdown_passenger_area dropdown-passenger-area-box flight-Search-box">
-                                              <p>Travellers &amp; Class</p>
-                                              <div className="dropdown">
-                                                <button className="dropdown-toggle final-count" data-toggle="dropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">1 Traveller, Economy</button>
-                                                {/*--- passenger box popup start ---*/}
-                                                <div className="dropdown-menu dropdown_passenger_info dropdown-passenger-box" aria-labelledby="dropdownMenuButton1">
-                                                  <div className="traveller-calulate-persons dropdown-passenger-content">
-                                                    <div className="passengers">
-                                                      <h5>Travellers</h5>
-                                                      <div className="passengers-types">
-                                                        <div className="passengers-type-new">
-                                                          <div className="passenger-head">
-                                                            <h6>Adults</h6>
-                                                            <span>12 yrs or above</span>
-                                                          </div>
-                                                          <div className="passenger-count">
-                                                            <span className="passenger-count-active">1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passengers-type-new">
-                                                          <div className="passenger-head">
-                                                            <h6>Adults</h6>
-                                                            <span>2 - 12 yrs</span>
-                                                          </div>
-                                                          <div className="passenger-count">
-                                                            <span className="passenger-count-active count count">0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passengers-type-new">
-                                                          <div className="passenger-head">
-                                                            <h6>Children</h6>
-                                                            <span>0 -2 yrs</span>
-                                                          </div>
-                                                          <div className="passenger-count">
-                                                            <span className="passenger-count-active">0</span><span>1</span><span>2</span><span>3</span><span>4</span>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passenger-text">
-                                                          <div className="passenger-logo">
-                                                            <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="GroupIcon" className="h-20 w-20" style={{ userSelect: 'none', display: 'inline-block' }}><path fillRule="evenodd" d="M12.7143 7.9076c0 1.3077-1.0844 2.4077-2.4717 2.4077-1.3873 0-2.4717-1.1-2.4717-2.4077C7.771 6.6 8.8553 5.5 10.2426 5.5c1.3873 0 2.4717 1.1 2.4717 2.4076Zm1.5014 0c0 2.1582-1.7788 3.9077-3.9731 3.9077s-3.9731-1.7495-3.9731-3.9077C6.2695 5.7496 8.0483 4 10.2426 4s3.9731 1.7495 3.9731 3.9076Zm2.3735 7.2162c-3.6311-3.4101-9.0438-3.4071-12.6844-.0148C2.155 16.7396 3.12 20 5.4813 20h9.5154c2.3467 0 3.3407-3.2345 1.5925-4.8762ZM4.7819 16.2579c3.1349-2.9211 7.804-2.9211 10.9262.011.8236.7735.3174 2.2282-.7114 2.2282H5.4813c-1.021 0-1.535-1.4607-.6994-2.2392Zm11.5044-3.4757c.1301-.3933.5548-.6067.9484-.4767 1.3435.4438 3.7739 1.6945 3.7739 4.3569 0 1.3963-1.0214 2.1463-2.0675 2.1463-.9682 0-.9682-1.5 0-1.5 1.7717-.4337-.8558-3.3712-2.1777-3.579a.7498.7498 0 0 1-.4771-.9475Zm-.6702-7.1478c-.9624-.0925-1.1135 1.3999-.1484 1.4927 1.9914.1915 1.767 2.9102-.2699 2.7143-.9624-.0926-1.1134 1.3998-.1484 1.4926 3.8917.3743 4.4702-5.0527.5667-5.6996Z" clipRule="evenodd" /></svg>
-                                                          </div>
-                                                          <div className="passenger-text-line">
-                                                            <h4>Planning a trip for more than 9 travellers?</h4>
-                                                            <a href="#">Create Group Booking</a>
-                                                          </div>
-                                                        </div>
-                                                        <div className="passenger-cabin-selection">
-                                                          <h3>Class</h3>
-                                                          <div className="passenger-cabin-list">
-                                                            <button className="passenger-cabin-list-active button">Economy</button>
-                                                            <button type="button">Premium Economy</button>
-                                                            <button type="button">Business</button>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
+
+                                          <div className="traveller-input-container">
+                                            <label htmlFor="traveller-input">Travellers & Class</label>
+                                            <div className="dropdown">
+                                              <button
+                                                className="dropdown-toggle"
+                                                type="button"
+                                                id="travellerDropdown"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                              >
+                                                {`${travellers.adults + travellers.children + travellers.infants} Travellers, ${travellers.class}`}
+                                              </button>
+                                              <div className="dropdown-menu" aria-labelledby="travellerDropdown">
+                                                <div className="traveller-options">
+                                                  <div className="option">
+                                                    <span>Adults (12+ years)</span>
+                                                    <input
+                                                      type="number"
+                                                      min="1"
+                                                      max="9"
+                                                      value={travellers.adults}
+                                                      onChange={(e) =>
+                                                        handleTravellerChange("adults", parseInt(e.target.value, 10))
+                                                      }
+                                                    />
                                                   </div>
-                                                  <div className="passenger-done-btn">
-                                                    <a href="#">Done</a>
+                                                  <div className="option">
+                                                    <span>Children (2-12 years)</span>
+                                                    <input
+                                                      type="number"
+                                                      min="0"
+                                                      max="9"
+                                                      value={travellers.children}
+                                                      onChange={(e) =>
+                                                        handleTravellerChange(
+                                                          "children",
+                                                          parseInt(e.target.value, 10)
+                                                        )
+                                                      }
+                                                    />
+                                                  </div>
+                                                  <div className="option">
+                                                    <span>Infants (0-2 years)</span>
+                                                    <input
+                                                      type="number"
+                                                      min="0"
+                                                      max="4"
+                                                      value={travellers.infants}
+                                                      onChange={(e) =>
+                                                        handleTravellerChange("infants", parseInt(e.target.value, 10))
+                                                      }
+                                                    />
                                                   </div>
                                                 </div>
-                                                {/*--- passenger box popup start ---*/}
+                                                <div className="class-options">
+                                                  <h5>Class</h5>
+                                                  <button
+                                                    className={`class-option ${travellers.class === "Economy" ? "active" : ""
+                                                      }`}
+                                                    onClick={() => handleClassChange("Economy")}
+                                                  >
+                                                    Economy
+                                                  </button>
+                                                  <button
+                                                    className={`class-option ${travellers.class === "Premium Economy" ? "active" : ""
+                                                      }`}
+                                                    onClick={() => handleClassChange("Premium Economy")}
+                                                  >
+                                                    Premium Economy
+                                                  </button>
+                                                  <button
+                                                    className={`class-option ${travellers.class === "Business" ? "active" : ""
+                                                      }`}
+                                                    onClick={() => handleClassChange("Business")}
+                                                  >
+                                                    Business
+                                                  </button>
+                                                </div>
+                                                <button className="done-btn" onClick={handleSubmit}>
+                                                  Done
+                                                </button>
                                               </div>
-                                              {/* <span>Business</span> */}
                                             </div>
                                           </div>
+
                                           <div className="top_form_search_button p-0 col-lg-1" >
                                             <a href="#" className=" tab-search-btn">Search
                                               {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
@@ -1347,10 +1153,10 @@ const Home = () => {
                                         </div>
                                       </div>
                                       <div className="top_form_search_button p-0 col-lg-1" >
-                                            <a href="#" className=" tab-search-btn">Search
-                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
-                                            </a>
-                                          </div>
+                                        <a href="#" className=" tab-search-btn">Search
+                                          {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                        </a>
+                                      </div>
                                     </div>
                                   </form>
                                 </div>
@@ -1369,84 +1175,8 @@ const Home = () => {
                                           <input type="text" placeholder="Enter Hotel or City Name" />
                                           {/* <span>Where are you going?</span> */}
                                         </div>
-                                        {/*--- hotels popup modal content  ----*/}
-                                        <div className="flight-search-hotels-popup bg-white p-3 ">
-                                          <div className="row">
-                                            <div className="col-12">
-                                              <div className="row hotel-current-location-box mx-sm-2 mx-0 pb-sm-3 pb-2">
-                                                <div className="col-2 hotel-current-icon">
-                                                  <span className="d-flex align-items-center justify-content-center ">
-                                                    <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="MyLocationIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path fillRule="evenodd" d="M12.0283 3a.7614.7614 0 0 1 .7614.7614v1.1544c3.328.3533 5.9726 2.9958 6.329 6.3228h1.1482a.7614.7614 0 0 1 0 1.5228h-1.1467c-.3505 3.3337-2.9978 5.9831-6.3305 6.3368v1.1404a.7614.7614 0 0 1-1.5228 0v-1.1404c-3.3327-.3537-5.98-3.0031-6.3306-6.3368H3.7897a.7614.7614 0 0 1 0-1.5228h1.1481c.3565-3.327 3.001-5.9696 6.3291-6.3228V3.7614A.7614.7614 0 0 1 12.0283 3Zm5.6086 9.007c0 3.0976-2.5111 5.6086-5.6086 5.6086-3.0976 0-5.6086-2.511-5.6086-5.6086 0-3.0975 2.511-5.6085 5.6086-5.6085 3.0975 0 5.6086 2.511 5.6086 5.6085Zm-3.5479-.0001c0 1.1381-.9226 2.0607-2.0607 2.0607-1.138 0-2.0606-.9226-2.0606-2.0607 0-1.138.9226-2.0606 2.0606-2.0606 1.1381 0 2.0607.9226 2.0607 2.0606Zm1.5228 0c0 1.9791-1.6044 3.5835-3.5835 3.5835-1.979 0-3.5834-1.6044-3.5834-3.5835 0-1.979 1.6044-3.5834 3.5834-3.5834 1.9791 0 3.5835 1.6044 3.5835 3.5834Z" clipRule="evenodd" /></svg>
-                                                  </span>
-                                                </div>
-                                                <div className="col-10 d-flex align-items-center justify-content-between hotel-current-text">
-                                                  <h4 className="m-0 fw-bold"> Use Current Location</h4>
-                                                  <span>
-                                                    <svg width="1em" height="1em" fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="NearMeIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path fillRule="evenodd" d="M19.6569 3.8431a.6662.6662 0 0 1 .1609.6817l-5.1859 15.5575a.6662.6662 0 0 1-1.2635.001l-2.4977-7.454-7.454-2.4977a.6662.6662 0 0 1 .001-1.2635l15.5575-5.1859a.6662.6662 0 0 1 .6817.161ZM5.7297 9.5016l5.8788 1.97a.666.666 0 0 1 .4199.4199l1.9699 5.8788 4.1344-12.403-12.403 4.1343Z" clipRule="evenodd" /></svg>
-                                                  </span>
-                                                </div>
-                                              </div>
-                                              <div className="hotel-dest">
-                                                <h3 className="m-0 fw-bold">Popular Destination</h3>
-                                                <div className="row hotel-dest-content py-sm-3 py-2">
-                                                  <div className="col-2 ps-0 hotel-dest-icon">
-                                                    <span className="d-flex align-items-center justify-content-center ">
-                                                      <svg width={30} height={30} fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="CityIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M6.8667 11.8989c-.2844 0-.515.2237-.515.4997 0 .276.2306.4997.515.4997s.515-.2237.515-.4997c0-.276-.2306-.4997-.515-.4997Zm-.515 2.4673c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Zm.515 1.5504c-.2844 0-.515.2238-.515.4997 0 .276.2306.4998.515.4998s.515-.2238.515-.4998c0-.2759-.2306-.4997-.515-.4997Zm-.515 2.5745c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Z" /><path fillRule="evenodd" d="M14.108 2.725v1.0175c1.2262.0899 1.738 1.1136 1.738 2.1692.6045.1099 1.062.6247 1.062 1.2433v5.0608h2.2851c1.1376 0 2.0598.8949 2.0598 1.9989v5.8132c0 .1629-.0201.3213-.058.4729h.058c.9961 0 .9961 1.4992 0 1.4992H2.7471c-.9961 0-.9961-1.4992 0-1.4992h.058a1.9473 1.9473 0 0 1-.058-.473V10.862c0-1.104.9222-1.999 2.0598-1.999h4.6345V7.1863c0-.6468.4881-1.1829 1.1264-1.2803 0-1.1665.6661-2.1686 1.9954-2.1686V2.7251c0-.9668 1.5448-.9668 1.5448 0Zm.1931 3.3993c0 .6186.4576 1.1334 1.0621 1.2433v4.8482c-1.2124 0-2.3378.7039-2.3378 1.9989v5.8132c0 .7848-2.0392.9323-2.0392-.0001V7.3734c.6383-.0974 1.1264-.6336 1.1264-1.2803 0-1.2543 2.1885-1.3465 2.1885.0312ZM9.4414 10.862c0-.276-.2306-.4998-.515-.4998H4.807c-.2844 0-.515.2238-.515.4998v9.1658c0 .2195.1458.4059.3485.473H9.093c.2026-.0671.3484-.2535.3484-.473V10.862Zm9.5908 9.6388c.3294 0 .6758-.061.6758-.4729v-5.8132c0-.276-.2305-.4997-.5149-.4997h-4.108c-.2844 0-.5149.2237-.5149.4997v5.8132c0 .4733.4366.4729.793.4729V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458h.5794V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458Z" clipRule="evenodd" /></svg>
-                                                    </span>
-                                                  </div>
-                                                  <div className="col-10 hotel-dest-name">
-                                                    <p>Jaipur</p>
-                                                    <p>201 Properties</p>
-                                                  </div>
-                                                </div>
-                                                <div className="row hotel-dest-content py-sm-3 py-2">
-                                                  <div className="col-2 ps-0 hotel-dest-icon">
-                                                    <span className="d-flex align-items-center justify-content-center ">
-                                                      <svg width={30} height={30} fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="CityIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M6.8667 11.8989c-.2844 0-.515.2237-.515.4997 0 .276.2306.4997.515.4997s.515-.2237.515-.4997c0-.276-.2306-.4997-.515-.4997Zm-.515 2.4673c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Zm.515 1.5504c-.2844 0-.515.2238-.515.4997 0 .276.2306.4998.515.4998s.515-.2238.515-.4998c0-.2759-.2306-.4997-.515-.4997Zm-.515 2.5745c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Z" /><path fillRule="evenodd" d="M14.108 2.725v1.0175c1.2262.0899 1.738 1.1136 1.738 2.1692.6045.1099 1.062.6247 1.062 1.2433v5.0608h2.2851c1.1376 0 2.0598.8949 2.0598 1.9989v5.8132c0 .1629-.0201.3213-.058.4729h.058c.9961 0 .9961 1.4992 0 1.4992H2.7471c-.9961 0-.9961-1.4992 0-1.4992h.058a1.9473 1.9473 0 0 1-.058-.473V10.862c0-1.104.9222-1.999 2.0598-1.999h4.6345V7.1863c0-.6468.4881-1.1829 1.1264-1.2803 0-1.1665.6661-2.1686 1.9954-2.1686V2.7251c0-.9668 1.5448-.9668 1.5448 0Zm.1931 3.3993c0 .6186.4576 1.1334 1.0621 1.2433v4.8482c-1.2124 0-2.3378.7039-2.3378 1.9989v5.8132c0 .7848-2.0392.9323-2.0392-.0001V7.3734c.6383-.0974 1.1264-.6336 1.1264-1.2803 0-1.2543 2.1885-1.3465 2.1885.0312ZM9.4414 10.862c0-.276-.2306-.4998-.515-.4998H4.807c-.2844 0-.515.2238-.515.4998v9.1658c0 .2195.1458.4059.3485.473H9.093c.2026-.0671.3484-.2535.3484-.473V10.862Zm9.5908 9.6388c.3294 0 .6758-.061.6758-.4729v-5.8132c0-.276-.2305-.4997-.5149-.4997h-4.108c-.2844 0-.5149.2237-.5149.4997v5.8132c0 .4733.4366.4729.793.4729V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458h.5794V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458Z" clipRule="evenodd" /></svg>
-                                                    </span>
-                                                  </div>
-                                                  <div className="col-10 hotel-dest-name">
-                                                    <p>Amritsar</p>
-                                                    <p>190 Properties</p>
-                                                  </div>
-                                                </div>
-                                                <div className="row hotel-dest-content py-sm-3 py-2">
-                                                  <div className="col-2 ps-0 hotel-dest-icon">
-                                                    <span className="d-flex align-items-center justify-content-center ">
-                                                      <svg width={30} height={30} fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="CityIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M6.8667 11.8989c-.2844 0-.515.2237-.515.4997 0 .276.2306.4997.515.4997s.515-.2237.515-.4997c0-.276-.2306-.4997-.515-.4997Zm-.515 2.4673c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Zm.515 1.5504c-.2844 0-.515.2238-.515.4997 0 .276.2306.4998.515.4998s.515-.2238.515-.4998c0-.2759-.2306-.4997-.515-.4997Zm-.515 2.5745c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Z" /><path fillRule="evenodd" d="M14.108 2.725v1.0175c1.2262.0899 1.738 1.1136 1.738 2.1692.6045.1099 1.062.6247 1.062 1.2433v5.0608h2.2851c1.1376 0 2.0598.8949 2.0598 1.9989v5.8132c0 .1629-.0201.3213-.058.4729h.058c.9961 0 .9961 1.4992 0 1.4992H2.7471c-.9961 0-.9961-1.4992 0-1.4992h.058a1.9473 1.9473 0 0 1-.058-.473V10.862c0-1.104.9222-1.999 2.0598-1.999h4.6345V7.1863c0-.6468.4881-1.1829 1.1264-1.2803 0-1.1665.6661-2.1686 1.9954-2.1686V2.7251c0-.9668 1.5448-.9668 1.5448 0Zm.1931 3.3993c0 .6186.4576 1.1334 1.0621 1.2433v4.8482c-1.2124 0-2.3378.7039-2.3378 1.9989v5.8132c0 .7848-2.0392.9323-2.0392-.0001V7.3734c.6383-.0974 1.1264-.6336 1.1264-1.2803 0-1.2543 2.1885-1.3465 2.1885.0312ZM9.4414 10.862c0-.276-.2306-.4998-.515-.4998H4.807c-.2844 0-.515.2238-.515.4998v9.1658c0 .2195.1458.4059.3485.473H9.093c.2026-.0671.3484-.2535.3484-.473V10.862Zm9.5908 9.6388c.3294 0 .6758-.061.6758-.4729v-5.8132c0-.276-.2305-.4997-.5149-.4997h-4.108c-.2844 0-.5149.2237-.5149.4997v5.8132c0 .4733.4366.4729.793.4729V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458h.5794V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458Z" clipRule="evenodd" /></svg>
-                                                    </span>
-                                                  </div>
-                                                  <div className="col-10 hotel-dest-name">
-                                                    <p>Hyderabad</p>
-                                                    <p>551 Properties</p>
-                                                  </div>
-                                                </div>
-                                                <div className="row hotel-dest-content py-sm-3 py-2">
-                                                  <div className="col-2 ps-0 hotel-dest-icon">
-                                                    <span className="d-flex align-items-center justify-content-center ">
-                                                      <svg width={30} height={30} fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="CityIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M6.8667 11.8989c-.2844 0-.515.2237-.515.4997 0 .276.2306.4997.515.4997s.515-.2237.515-.4997c0-.276-.2306-.4997-.515-.4997Zm-.515 2.4673c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Zm.515 1.5504c-.2844 0-.515.2238-.515.4997 0 .276.2306.4998.515.4998s.515-.2238.515-.4998c0-.2759-.2306-.4997-.515-.4997Zm-.515 2.5745c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Z" /><path fillRule="evenodd" d="M14.108 2.725v1.0175c1.2262.0899 1.738 1.1136 1.738 2.1692.6045.1099 1.062.6247 1.062 1.2433v5.0608h2.2851c1.1376 0 2.0598.8949 2.0598 1.9989v5.8132c0 .1629-.0201.3213-.058.4729h.058c.9961 0 .9961 1.4992 0 1.4992H2.7471c-.9961 0-.9961-1.4992 0-1.4992h.058a1.9473 1.9473 0 0 1-.058-.473V10.862c0-1.104.9222-1.999 2.0598-1.999h4.6345V7.1863c0-.6468.4881-1.1829 1.1264-1.2803 0-1.1665.6661-2.1686 1.9954-2.1686V2.7251c0-.9668 1.5448-.9668 1.5448 0Zm.1931 3.3993c0 .6186.4576 1.1334 1.0621 1.2433v4.8482c-1.2124 0-2.3378.7039-2.3378 1.9989v5.8132c0 .7848-2.0392.9323-2.0392-.0001V7.3734c.6383-.0974 1.1264-.6336 1.1264-1.2803 0-1.2543 2.1885-1.3465 2.1885.0312ZM9.4414 10.862c0-.276-.2306-.4998-.515-.4998H4.807c-.2844 0-.515.2238-.515.4998v9.1658c0 .2195.1458.4059.3485.473H9.093c.2026-.0671.3484-.2535.3484-.473V10.862Zm9.5908 9.6388c.3294 0 .6758-.061.6758-.4729v-5.8132c0-.276-.2305-.4997-.5149-.4997h-4.108c-.2844 0-.5149.2237-.5149.4997v5.8132c0 .4733.4366.4729.793.4729V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458h.5794V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458Z" clipRule="evenodd" /></svg>
-                                                    </span>
-                                                  </div>
-                                                  <div className="col-10 hotel-dest-name">
-                                                    <p>Manali</p>
-                                                    <p>349 Properties</p>
-                                                  </div>
-                                                </div>
-                                                <div className="row hotel-dest-content py-sm-3 py-2">
-                                                  <div className="col-2 ps-0 hotel-dest-icon">
-                                                    <span className="d-flex align-items-center justify-content-center ">
-                                                      <svg width={30} height={30} fontSize="1.5rem" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-testid="CityIcon" style={{ userSelect: 'none', display: 'inline-block' }}><path d="M6.8667 11.8989c-.2844 0-.515.2237-.515.4997 0 .276.2306.4997.515.4997s.515-.2237.515-.4997c0-.276-.2306-.4997-.515-.4997Zm-.515 2.4673c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Zm.515 1.5504c-.2844 0-.515.2238-.515.4997 0 .276.2306.4998.515.4998s.515-.2238.515-.4998c0-.2759-.2306-.4997-.515-.4997Zm-.515 2.5745c0-.276.2306-.4997.515-.4997s.515.2237.515.4997c0 .276-.2306.4997-.515.4997s-.515-.2237-.515-.4997Z" /><path fillRule="evenodd" d="M14.108 2.725v1.0175c1.2262.0899 1.738 1.1136 1.738 2.1692.6045.1099 1.062.6247 1.062 1.2433v5.0608h2.2851c1.1376 0 2.0598.8949 2.0598 1.9989v5.8132c0 .1629-.0201.3213-.058.4729h.058c.9961 0 .9961 1.4992 0 1.4992H2.7471c-.9961 0-.9961-1.4992 0-1.4992h.058a1.9473 1.9473 0 0 1-.058-.473V10.862c0-1.104.9222-1.999 2.0598-1.999h4.6345V7.1863c0-.6468.4881-1.1829 1.1264-1.2803 0-1.1665.6661-2.1686 1.9954-2.1686V2.7251c0-.9668 1.5448-.9668 1.5448 0Zm.1931 3.3993c0 .6186.4576 1.1334 1.0621 1.2433v4.8482c-1.2124 0-2.3378.7039-2.3378 1.9989v5.8132c0 .7848-2.0392.9323-2.0392-.0001V7.3734c.6383-.0974 1.1264-.6336 1.1264-1.2803 0-1.2543 2.1885-1.3465 2.1885.0312ZM9.4414 10.862c0-.276-.2306-.4998-.515-.4998H4.807c-.2844 0-.515.2238-.515.4998v9.1658c0 .2195.1458.4059.3485.473H9.093c.2026-.0671.3484-.2535.3484-.473V10.862Zm9.5908 9.6388c.3294 0 .6758-.061.6758-.4729v-5.8132c0-.276-.2305-.4997-.5149-.4997h-4.108c-.2844 0-.5149.2237-.5149.4997v5.8132c0 .4733.4366.4729.793.4729V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458h.5794V16.155c0-.9667 1.5448-.9667 1.5448 0v4.3458Z" clipRule="evenodd" /></svg>
-                                                    </span>
-                                                  </div>
-                                                  <div className="col-10 hotel-dest-name">
-                                                    <p>Shimla</p>
-                                                    <p>467 Properties</p>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
+
+
                                       </div>
                                       <div className="col-lg-4 col-md-6 col-sm-12 col-12 p-0 px-1 pe-0">
                                         <div className="form_search_date">
@@ -1546,10 +1276,10 @@ const Home = () => {
                                         </div>
                                       </div>
                                       <div className="top_form_search_button p-0 col-lg-1" >
-                                            <a href="#" className=" tab-search-btn">Search
-                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
-                                            </a>
-                                          </div>
+                                        <a href="#" className=" tab-search-btn">Search
+                                          {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                        </a>
+                                      </div>
                                     </div>
                                   </form>
                                 </div>
@@ -1927,10 +1657,10 @@ const Home = () => {
                                               </div>
                                             </div>
                                             <div className="top_form_search_button p-0 col-lg-1" >
-                                            <a href="#" className=" tab-search-btn">Search
-                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
-                                            </a>
-                                          </div>
+                                              <a href="#" className=" tab-search-btn">Search
+                                                {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                              </a>
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
@@ -2125,10 +1855,10 @@ const Home = () => {
                                         </div>
                                       </div>
                                       <div className="top_form_search_button p-0 col-lg-1" >
-                                            <a href="#" className=" tab-search-btn">Search
-                                              {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
-                                            </a>
-                                          </div>
+                                        <a href="#" className=" tab-search-btn">Search
+                                          {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
+                                        </a>
+                                      </div>
                                     </div>
                                   </form>
                                 </div>

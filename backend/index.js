@@ -7,6 +7,7 @@ import morgan from "morgan"
 import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js"
 import otpRoutes from "./routes/otpRoutes.js"
+import flightRoutes from "./routes/flightRoutes.js"
 
 export const app = express();
 
@@ -21,8 +22,9 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //routing
-   app.use("/api/v1/otp", otpRoutes);
-    app.use("/api/v1/auth", authRoutes);
+app.use('/api/v1/flights', flightRoutes);  
+app.use("/api/v1/otp", otpRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 
 
