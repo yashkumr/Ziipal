@@ -107,12 +107,12 @@ const Home = () => {
 
   };
 
-  const handleSubmit = () => {
-    // Send the travellers data to the backend
-    console.log(travellers);
-    // Example: axios.post('/api/travel', travellers);
+  // const handleSubmit = () => {
+  //   // Send the travellers data to the backend
+  //   // console.log(travellers);
+  //   // Example: axios.post('/api/travel', travellers);
 
-  };
+  // };
 
 
   const handleSearch = () => {
@@ -281,7 +281,7 @@ const Home = () => {
                                                     type="date"
                                                     value={date}
                                                     onChange={(e) => setDate(e.target.value)}
-                                                    format="DD-MM-YYYY"
+                                                    format="MMM-DD-YYYY"
                                                   />
 
                                                 </div>
@@ -348,41 +348,40 @@ const Home = () => {
                                                   </div>
                                                   <div className="class-options">
                                                     <h5>Class</h5>
-                                                    <button
+                                                    <a
                                                       className={`class-option ${travellers.class === "Economy" ? "active" : ""
                                                         }`}
                                                       onClick={() => handleClassChange("Economy")}
                                                     >
                                                       Economy
-                                                    </button>
-                                                    <button
+                                                    </a>
+                                                    <a
                                                       className={`class-option ${travellers.class === "Premium Economy" ? "active" : ""
                                                         }`}
                                                       onClick={() => handleClassChange("Premium Economy")}
                                                     >
                                                       Premium Economy
-                                                    </button>
-                                                    <button
+                                                    </a>
+                                                    <a
                                                       className={`class-option ${travellers.class === "Business" ? "active" : ""
                                                         }`}
                                                       onClick={() => handleClassChange("Business")}
                                                     >
                                                       Business
-                                                    </button>
+                                                    </a>
                                                   </div>
-                                                  <button className="done-btn" onClick={handleSubmit}>
+                                                  <a href='#' className="done-btn" >
                                                     Done
-                                                  </button>
+                                                  </a>
                                                 </div>
                                               </div>
                                             </div>
-
                                           </div>
 
                                           <div className="top_form_search_button p-0 col-lg-1" >
-                                            <a href="#" className=" tab-search-btn">Search
+                                            <button  className=" tab-search-btn">Search
                                               {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
-                                            </a>
+                                            </button>
                                           </div>
                                           <div className="col-md-12 col-12 pt-lg-3 pt-0">
                                             <div className="fare-box d-flex fare-box-new">
@@ -462,7 +461,7 @@ const Home = () => {
                                             </div>
                                           </div>
 
-                                          <div className="traveller-input-container">
+                                          {/* <div className="traveller-input-container">
                                             <label htmlFor="traveller-input">Travellers & Class</label>
                                             <div className="dropdown">
                                               <button
@@ -545,7 +544,7 @@ const Home = () => {
                                                 </button>
                                               </div>
                                             </div>
-                                          </div>
+                                          </div> */}
 
                                           <div className="top_form_search_button p-0 col-lg-1" >
                                             <a href="#" className=" tab-search-btn">Search

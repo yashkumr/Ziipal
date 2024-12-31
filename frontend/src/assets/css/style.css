@@ -6329,7 +6329,254 @@ label {
 }
 
 
+/* -----------------------------Sahil css code---------------------- */
 
+
+
+.bookings{
+  width: 76vw;
+  height: fit-content;
+  box-shadow: 3px 2px 3px 3px rgb(184, 177, 177);
+  border-radius: 4px;
+  border: 1px solid rgb(160, 160, 243);
+  margin: 0px auto 35px 8px;
+  padding: 2px 3px;
+}
+.booking_details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3px 0px;
+}
+.deal{
+ color: white;
+ background-color: rgb(74, 167, 74);
+ padding:5px 7px;
+ border-radius: 4px;
+}
+.bookings .offer{
+  background-color: rgb(254, 224, 229);
+  width: fit-content;
+  border-radius: 4px;
+  padding: 4px 4px 4px 3px;
+  font-size: 14px;
+  color: rgb(67, 63, 63);
+  
+}
+.flightdetail{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.flightdetail div h4{
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: -2px;
+}
+.flightdetail div p{
+  font-size: 14px;
+  margin-bottom: -2px;
+}
+.weight{
+  background-color: rgb(202, 239, 202);
+  padding: 0px 15px;
+  border-radius: 7px;
+  font-size: 12px;
+  }
+.flight1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+}
+.flight2 h4, 
+.flight2 h2, 
+.flight2 p {
+  margin-bottom: 0px; 
+  padding: 0; 
+}
+
+.flight2 p{
+  color: rgb(67, 60, 60);
+  
+}
+
+.flight3{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flight3 hr{
+  width: 190px;
+  margin: 8px 0px;
+  
+}
+
+.flight4{
+  text-align: right;
+}
+.flight4 p{
+  color: rgb(67, 60, 60);
+}
+
+.flight4 h4, 
+.flight4 h2, 
+.flight4 p {
+  margin-bottom: 5px; 
+  padding: 0; 
+}
+
+
+.flight5 button{
+  padding: 10px 18px;
+  outline: none;
+  border: 1px solid red;
+  border-radius: 6px;
+  background-color: rgb(244, 220, 220);
+  font-weight: 500;
+  color: red;
+}
+.flight5 button:hover{
+  background-color: rgb(242, 20, 20);
+  color: white;
+}
+
+/* for filter container */
+
+.filtercontainer{
+  padding: 5px 5px 10px 10px;
+  display: flex;
+}
+.filtercontainer .sidefilterbar{
+  width: 25%;
+  background-color: white;
+  padding: 4px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 3px 2px 3px 3px rgb(153, 164, 158);
+}
+.pricerange{
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-bottom: 0.2px solid #eae6e6;
+  padding-bottom: 5px;
+  
+}
+.stops{
+  border-bottom: 0.2px solid #eae6e6;
+  padding-bottom: 5px;
+}
+.stops button{
+  background-color: rgb(204, 225, 252);
+  padding: 5px 10px;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  margin-right: 10px;
+  margin-top: 1px;
+  cursor: pointer;
+
+}
+.stops button:hover{
+  background-color: rgb(25, 120, 245);
+  color: white;
+}
+.price_to_from{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+}
+.price_to_from p{
+  font-size: 14px;
+}
+input{
+  width: 70%;
+}
+.departtime{
+  border-bottom: 0.2px solid #eae6e6;
+  padding-bottom: 5px; 
+}
+.departtime h4{
+ margin-bottom: 2px;
+ font-size: 18px;
+}
+.departtime p{
+  margin-bottom: 2px;
+}
+.depart{
+  display: flex; 
+  transform: translateX(-25px);
+  flex-wrap: wrap;  
+  
+}
+.depart li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  border: 0.5px solid rgb(181, 181, 189);
+  padding: 2px 3px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-right: 3px;
+}
+.depart li p{
+  color: black;
+  font-size: 13px;
+}
+.depart li:hover{
+  background-color: rgb(244, 239, 239);
+}
+
+
+.checkairlines{
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.2px solid #eae6e6;
+  padding-bottom: 3px;
+
+}
+.searchairline{
+  border: none;
+  outline: none;
+  border-bottom: 1px solid greenyellow;
+  padding: 2px 5px;
+}
+.check{
+  display: flex;
+  justify-content: start;
+  margin-bottom: -10px;
+ 
+  
+}
+.check input{
+  transform: scale(0.8);
+  width: fit-content;
+  margin-top: -15px;
+  margin-right: 5px;
+}
+.check p{
+  font-size: 14px;
+}
+
+
+
+@media (width<=930px) {
+  .booking_details{
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+}
+
+/* -----------------------------Sahil css code end --------------------- */
 
 
 /***********

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from "moment"
 
 // Function to get the access token using client credentials
 export const getAccessToken = async () => {
@@ -64,26 +65,26 @@ export const getLocations = async (req, res) => {
   }
 };
 
-export const flightResultController = async(req, res)=>{
+export const flightResultController = async (req, res) => {
 
-  try{
-    
+  try {
+
     const { source, destination, date, adults, children, infants, class: travelClass } = req.query;
     const rSource = source.split('-')[0]
     const rDest = destination.split('-')[0]
+    const formattedDate = moment(date, "YYYY-MM-DD").format("MMM-DD-YYYY");
     
-    console.log(date);
     // https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=DEL&dest=BLR&depDt=Dec-30-2024&adt=1&chd=0&inf=0&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100
     // const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=DEL&dest=BLR&depDt=${date}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`);
 
-    const  response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=${rSource}&dest=${rDest}&depDt=${date}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`)
-    console.log(response.data);
+    const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=${rSource}&dest=${rDest}&depDt=${formattedDate}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`)
+    res.json(response.data);
 
-  }catch(error){
+  } catch (error) {
     console.log(error);
     res.status(500).send({
-      success:false,
-      message:"error in fetching the results",
+      success: false,
+      message: "error in fetching the results",
       error
     })
   }
