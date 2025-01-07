@@ -6576,6 +6576,335 @@ input{
   
 }
 
+
+
+
+/*------------------------ queryFormcss --------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.queryparent {
+  width: 98vw;
+  margin: 5px auto;
+  margin-top: 80px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.leftside .top {
+  display: flex;
+  background-color: rgb(219, 242, 252);
+  border-radius: 9px 9px 0px 0px;
+  padding: 5px 3px;
+}
+
+.leftside .top h2 {
+  font-size: 22px;
+  padding-left: 5px;
+}
+
+.leftside {
+  width: 70%;
+  background-color: white;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  border-top: 1px solid #03c1e3;
+}
+
+.leftside .top {
+  display: flex;
+  background-color: rgb(219, 242, 252);
+  border-radius: 9px 9px 0px 0px;
+  padding: 5px 3px;
+}
+
+.leftside .departfrom {
+  display: flex;
+  border-radius: 9px 9px 0px 0px;
+}
+
+.departalldetail {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.departalldetail .departalldetailfirst {
+  display: flex;
+  justify-content: space-between;
+}
+
+.departalldetail .departalldetailfirst .logo {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+}
+
+.departalldetail .departalldetailfirst .logo button {
+  padding: 1px 8px;
+  background-color: rgb(226, 248, 240);
+  color: black;
+  border-radius: 15px;
+}
+
+.departalldetail .departalldetailfirst2 p {
+  margin-bottom: -3px;
+  font-size: 12px;
+}
+
+.departsec {
+  width: 92%;
+  margin: 15px auto;
+  padding: 7px 5px;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+
+.departalldetail .departalldetailsecond p {
+  margin-bottom: -5px;
+  font-size: 12px;
+}
+
+.departalldetail .departalldetailthird p {
+  margin-left: 10px;
+}
+
+.departalldetail .departalldetailthird button {
+  padding: 1px 12px;
+  background-color: rgb(231, 255, 231);
+  border-radius: 10px;
+}
+
+.rightside {
+  width: 25%;
+  border-radius: 10px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, .2);
+}
+
+.rightside .top {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(191, 235, 254);
+  border-radius: 9px 9px 0px 0px;
+  padding: 5px 3px;
+}
+
+.rightside .top h2 {
+  font-size: 17px;
+  padding-top: 4px;
+}
+.menpersonality{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.menpersonality span{
+  font-size: 12px;
+}
+
+.rightside .pricechart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.3px solid grey;
+  padding: 3px 6px 0px 6px;
+}
+.rightside .formbtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.countinueapplying{
+  padding: 6px 35px;
+  align-items: center;
+  background-color:#ef6614;
+  border-radius: 12px;
+  color: white;
+  
+  
+}
+
+
+/* query form inputs css  */
+
+.queryforminput{
+  width: 68vw;
+  margin: 0px 0px 0px 0px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, .2);
+}
+.queryforminput form{
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.queryforminput form .textareas{
+width: 52%;
+}
+.queryforminput form .textareas textarea{
+  height: 130px;
+  padding: 7px;
+}
+.queryforminput form button{
+  padding: 9px 28px;
+  background-color: #ef6614;
+  color: white;
+  border-radius: 9px;
+}
+.queryforminput input{
+  width: 25vw;
+  border: none;
+  border-bottom: 0.5px solid green;
+  margin-bottom: 20px;
+  padding-left: 10px;
+
+}
+
+.queryforminput .top {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  background-color: rgb(219, 242, 252);
+  border-radius: 9px 9px 0px 0px;
+  padding: 5px 3px;
+  margin-bottom: 15px;
+}
+.queryforminput .top .back{
+  margin-left: 580px;
+  color:red;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+@media (width<=855px){
+  .queryparent {
+      display: block;
+  }
+  .leftside {
+      width: 100%;
+  }
+  .rightside{
+      width: 100%;
+  }
+  .queryforminput{
+      width: 98vw;
+  }
+  .leftside .top h2 {
+      font-size: 15px;
+      padding-left: 3px;
+  }
+  .departalldetail .departalldetailfirst2 p {
+      margin-bottom: -4px;
+      font-size: 10px;
+  }
+  .departalldetail .departalldetailsecond p {
+      margin-bottom: -8px;
+      font-size: 10px;
+  }
+}
+@media (width<=500px){
+  .leftside .top h2 {
+      font-size: 12px;
+      padding-left: 1px;
+  }
+  .departalldetail .departalldetailfirst2 p {
+      margin-bottom: -6px;
+      font-size: 8px;
+  }
+  .departalldetail .departalldetailsecond p {
+      margin-bottom: -8px;
+      font-size: 8px;
+  }
+  .departalldetailthird p{
+      margin-bottom: -4px;
+      font-size: 10px;
+      margin-right: 10px;
+   
+  }
+  .departalldetailthird button {
+      display: none;
+  }
+  .departsec {
+      width: 98%;
+      padding: 4px 2px;
+  }   
+
+}
+
+
+/* ------------queryForm css end-------------- */
+
+
+
+
+/*    ------------------popupcss--------------- */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.popup{
+  height: 100vh;
+  width: 98vw;
+  position: absolute;
+  background-color: rgba(87, 84, 84, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+}
+.popupcontainer{
+  position: relative;
+  padding: 30px 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+}
+.checked{
+  position: absolute;
+  top: -30px;
+}
+.checked .checkicon{
+  font-size: 80px;
+  color: rgb(125, 206, 3);
+}
+.popupText{
+  padding: 4px;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  text-align: center;
+}
+.popupText button{
+  background-color: #ef6618;
+  color: white;
+  font-weight: bold;
+  padding: 7px 150px;
+  border-radius: 8px;
+}
+.popupText button:hover{
+  background-color: #ff6308;
+}
+/* ----------------popupcss end----------------- */
+
 /* -----------------------------Sahil css code end --------------------- */
 
 

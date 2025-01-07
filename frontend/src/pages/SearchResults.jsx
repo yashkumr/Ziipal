@@ -1,93 +1,103 @@
 
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Layout from "../components/Layout/Layout.jsx";
 import { RiFlightTakeoffFill } from "react-icons/ri";
+import { useFlight } from "../context/FlightContext.jsx";
 
 const SearchResults = () => {
     const location = useLocation();
-    const [flights, setFlights] = useState([]);
+    const { flights, loading, fetchFlights } = useFlight();
+
     const [filteredFlights, setFilteredFlights] = useState(flights); // Store filtered data
-    const [filters, setFilters] = useState({ priceRange: [0, 6000], airline: "", stops: null, selectedTimeSlot: '' });
+    const [filters, setFilters] = useState({ priceRange: [0, 6000], airline: "", stops: null, selectedTimeSlot: "" });
     const [showAll, setShowAll] = useState(false);
-    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchFlights = async () => {
-            const params = new URLSearchParams(location.search);
-            setLoading(true); // Show loading popup
-            const response = await axios.get(`/api/v1/flights/search-flights?${params.toString()}`);
-            setLoading(false); // Hide loading popup
-            setFlights(response.data);
-            console.log(response.data);
-        };
-        fetchFlights();
+        const params = new URLSearchParams(location.search);
+        fetchFlights(params.toString());
     }, [location]);
 
     useEffect(() => {
+        const handleFilter = () => {
+            let updatedFlights = [...flights];
+
+            // Filter by price range
+            updatedFlights = updatedFlights.filter(
+                (flight) =>
+                    flight?.fare?.adults >= filters.priceRange[0] &&
+                    flight?.fare?.adults <= filters.priceRange[1]
+            );
+
+            // Filter by airline
+            if (filters.airline) {
+                updatedFlights = updatedFlights.filter((flight) =>
+                    flight?.airlinesName?.name?.toLowerCase().includes(filters.airline.toLowerCase())
+                );
+            }
+
+            // Filter by stops
+            if (filters.stops !== null) {
+                updatedFlights = updatedFlights.filter((flight) => {
+                    const stopCount = flight?.route ? Object.keys(flight.route).length - 1 : 0;
+                    if (filters.stops >= 2) {
+                        return stopCount >= 2; // For flights with 2 or more stops
+                    }
+                    return stopCount === filters.stops; // For specific stop counts
+                });
+            }
+
+            // Filter by time slot
+            if (filters.selectedTimeSlot) {
+                updatedFlights = updatedFlights.filter((flight) => {
+                    const firstRoute = Object.values(flight?.route)?.[0];
+                    if (!firstRoute) return false;
+                    const departureHour = new Date(firstRoute.local_departure).getHours();
+
+                    switch (filters.selectedTimeSlot) {
+                        case "Morning":
+                            return departureHour >= 6 && departureHour < 12;
+                        case "Afternoon":
+                            return departureHour >= 12 && departureHour < 18;
+                        case "Evening":
+                            return departureHour >= 18 && departureHour < 24;
+                        default:
+                            return true;
+                    }
+                });
+            }
+
+            setFilteredFlights(updatedFlights);
+        };
+
         handleFilter();
-
-
     }, [flights, filters]);
-    const handleFilter = () => {
-        let filteredFlights = [...flights];
-        // Filter by price
-        filteredFlights = filteredFlights.filter((flight) => flight?.fare?.adults >= filters.priceRange[0] && flight?.fare?.adults <= filters.priceRange[1]);
-        if (filters.airline) {
-
-            filteredFlights = filteredFlights.filter((flight) => flight?.airlinesName?.name.includes(filters.airline));
-
-        }
-        if (filters.stops !== null) {
-            filteredFlights = filters.stops === null || filteredFlights.filter((flight) => (flight.route && Object.keys(flight.route).length === filters.stops || filters.stops >= 2));
-
-
-        }
-
-        // Filter by time slot
-        if (filters.selectedTimeSlot) {
-            filteredFlights = filteredFlights.filter((flight) => {
-                const firstRoute = Object.values(flight?.route)?.[0];
-                if (!firstRoute) return false;
-                const departureHour = new Date(firstRoute.local_departure).getHours();
-                console.log(departureHour);
-
-                // Morning: 6 AM - 12 PM, Afternoon: 12 PM - 6 PM, Evening: 6 PM - 12 AM
-                if (filters.selectedTimeSlot === "Morning") {
-                    return departureHour >= 6 && departureHour < 12;
-                } else if (filters.selectedTimeSlot === "Afternoon") {
-                    return departureHour >= 12 && departureHour < 18;
-                } else if (filters.selectedTimeSlot === "Evening") {
-                    return departureHour >= 18 && departureHour < 24;
-                }
-                return true;
-            });
-        }
-
-        setFilteredFlights(filteredFlights);
-    };
-
-
-
-
 
     const getTimeAndDate = (dateTimeString) => {
         const date = new Date(dateTimeString);
         return {
-            time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            time: date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
             date: date.toLocaleDateString(),
         };
     };
+
+
 
     // Divide the data
     const halfIndex = Math.ceil(flights.length / 4);
     const displayedFlights = showAll ? flights : flights.slice(0, halfIndex);
 
+    // const handleBookNow = (flightId) => {
+    //     navigate(`/single-flight/${flightId}`);
+    // };
+
 
     return (
         <>
-            <Layout>
+            <Layout   title={" ZIIPL | Search Results"}>
                 {loading ? (
                     <div className="loading-popup d-flex justify-content-center align-items-center bg-gray" style={{ height: "100vh" }}>
                         <div className="d-flex justify-content-center align-items-center ">
@@ -168,16 +178,16 @@ const SearchResults = () => {
                                 <h3 className="fs-4">Departure Time </h3>
                                 <div className="">
                                     <button className="m-1 p-1" onClick={() => setFilters({ ...filters, selectedTimeSlot: "Morning" })}>
-                                    <p> Morning</p>   <p>6 AM - 12 PM</p>
+                                        <p> Morning</p>   <p>6 AM - 12 PM</p>
                                     </button>
                                     <button className="m-1 p-1" onClick={() => setFilters({ ...filters, selectedTimeSlot: "Afternoon" })}>
-                                   <p> Afternoon </p>  <p>12 PM - 6 PM</p>
+                                        <p> Afternoon </p>  <p>12 PM - 6 PM</p>
                                     </button>
                                     <button className="m-1 p-1" onClick={() => setFilters({ ...filters, selectedTimeSlot: "Evening" })}>
-                                     <p> Evening</p> <p>6 PM - 12 AM </p>
+                                        <p> Evening</p> <p>6 PM - 12 AM </p>
                                     </button>
                                     <button className="m-1 p-1" onClick={() => setFilters({ ...filters, selectedTimeSlot: "" })}>
-                                      <p>All Times </p>  
+                                        <p>All Times </p>
                                     </button>
                                 </div>
                             </div>
@@ -296,7 +306,9 @@ const SearchResults = () => {
                                             </div>
                                             <div className="flight5">
                                                 <p className="text-center m-0 p-0">${flight?.fare?.adults}</p>
-                                                <button>BOOK NOW</button>
+                                                <Link to={`/flight-details/${flight.id}`} state={{ flight }} className="btn btn-primary">
+                                                    Book Now
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

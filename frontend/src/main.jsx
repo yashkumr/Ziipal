@@ -5,13 +5,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/Auth.jsx'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FlightProvider } from './context/FlightContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
 
   <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <FlightProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </FlightProvider>
   </AuthProvider>
 )

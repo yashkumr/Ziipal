@@ -1,5 +1,7 @@
 import axios from 'axios';
 import moment from "moment"
+import nodemailer from "nodemailer";
+import Mailgen from "mailgen";
 
 // Function to get the access token using client credentials
 export const getAccessToken = async () => {
@@ -73,7 +75,7 @@ export const flightResultController = async (req, res) => {
     const rSource = source.split('-')[0]
     const rDest = destination.split('-')[0]
     const formattedDate = moment(date, "YYYY-MM-DD").format("MMM-DD-YYYY");
-    
+
     // https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=DEL&dest=BLR&depDt=Dec-30-2024&adt=1&chd=0&inf=0&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100
     // const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=DEL&dest=BLR&depDt=${date}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`);
 
@@ -89,3 +91,94 @@ export const flightResultController = async (req, res) => {
     })
   }
 }
+
+
+export const getbill = (req, res) => {
+  try {
+
+    console.log(req.body);
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "User email is required." });
+    }
+
+    const adminEmail = process.env.EMAIL; // Admin email from environment variables
+
+    // Nodemailer configuration
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    // Mailgen configuration
+    const MailGenerator = new Mailgen({
+      theme: "default",
+      product: {
+        name: "Zuber International India Private Limited",
+        link: "https://mailgen.js/",
+      },
+    });
+
+    // Email content
+    const response = {
+      body: {
+        name: "Zuber International India Private Limited",
+        intro: "Your information has arrived!",
+        table: {
+          data: [
+            {
+              item: "Welcome to the Zuber International India Pvt Ltd",
+              description:
+                "Zuber International India Pvt Ltd is the most trusted and growing company since 2023",
+              price: "Get Quote",
+            },
+          ],
+        },
+        outro: "Looking forward to doing more business with you.",
+      },
+    };
+
+    const mailContent = MailGenerator.generate(response);
+
+    // Email messages
+    const userMessage = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "Get Quote",
+      html: mailContent,
+    };
+
+    const adminMessage = {
+      from: process.env.EMAIL,
+      to: adminEmail,
+      subject: "New Quote Request",
+      html: mailContent,
+    };
+
+    // Sending emails
+    transporter
+      .sendMail(userMessage)
+      .then(() => transporter.sendMail(adminMessage))
+      .then(() => {
+        return res.status(201).json({
+          message: "A new email has been sent successfully.",
+        });
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+        return res.status(500).json({
+          error: "Failed to send email. Please try again later.",
+        });
+      });
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return res.status(500).json({
+      error: "An unexpected error occurred.",
+    });
+  }
+};
+

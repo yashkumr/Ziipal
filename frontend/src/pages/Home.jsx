@@ -123,7 +123,7 @@ const Home = () => {
 
   return (
     <>
-      <Layout>
+      <Layout title={"ZIIPL | Home"} description={"Zuber Home Page"} keywords={"Zuber, Home, Travel, Flights"} author={"Zuber"}>
 
 
         {/* makeMyTrip section Start */}
