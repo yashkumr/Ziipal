@@ -1,25 +1,51 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Layout from "../components/Layout/Layout.jsx";
 import { RiFlightTakeoffFill } from "react-icons/ri";
 import { useFlight } from "../context/FlightContext.jsx";
+import { CurrencyContext } from "../context/CurrencyContext.jsx";
 
 const SearchResults = () => {
+    const { currency, convertPrice } = useContext(CurrencyContext);
+
     const location = useLocation();
-    const { flights, loading, fetchFlights } = useFlight();
-
+    const { flights, loading, fetchFlights,errorCode } = useFlight();
     const [filteredFlights, setFilteredFlights] = useState(flights); // Store filtered data
-    const [filters, setFilters] = useState({ priceRange: [0, 6000], airline: "", stops: null, selectedTimeSlot: "" });
+    const [filters, setFilters] = useState({ priceRange: [0, 0], airline: "", stops: null, selectedTimeSlot: "" });
+    const [minMaxPrice, setMinMaxPrice] = useState({
+        minPrice: 0,
+        maxPrice: 0,
+    });
     const [showAll, setShowAll] = useState(false);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
+
         fetchFlights(params.toString());
     }, [location]);
+
+
+
+
+    // Update the default price range based on flights data
+    useEffect(() => {
+        if (flights.length > 0) {
+            const prices = flights.map((flight) => convertPrice(flight?.fare?.adults, currency)).filter(Boolean);
+            const minPrice = Math.min(...prices);
+            const maxPrice = Math.max(...prices);
+
+            setMinMaxPrice({ minPrice, maxPrice });
+
+            setFilters((prevFilters) => ({
+                ...prevFilters,
+                priceRange: [minPrice, maxPrice],
+            }));
+
+            setFilteredFlights(flights); // Initialize filtered flights
+        }
+    }, [flights]);
 
     useEffect(() => {
         const handleFilter = () => {
@@ -28,8 +54,8 @@ const SearchResults = () => {
             // Filter by price range
             updatedFlights = updatedFlights.filter(
                 (flight) =>
-                    flight?.fare?.adults >= filters.priceRange[0] &&
-                    flight?.fare?.adults <= filters.priceRange[1]
+                    convertPrice(flight?.fare?.adults, currency) >= filters.priceRange[0] &&
+                    convertPrice(flight?.fare?.adults, currency) <= filters.priceRange[1]
             );
 
             // Filter by airline
@@ -76,6 +102,8 @@ const SearchResults = () => {
         handleFilter();
     }, [flights, filters]);
 
+    console.log(filteredFlights);
+
     const getTimeAndDate = (dateTimeString) => {
         const date = new Date(dateTimeString);
         return {
@@ -87,18 +115,55 @@ const SearchResults = () => {
 
 
     // Divide the data
-    const halfIndex = Math.ceil(flights.length / 4);
-    const displayedFlights = showAll ? flights : flights.slice(0, halfIndex);
+    const halfIndex = Math.ceil(filteredFlights.length / 4);
+    const displayedFlights = showAll ? filteredFlights : filteredFlights.slice(0, halfIndex);
 
-    // const handleBookNow = (flightId) => {
-    //     navigate(`/single-flight/${flightId}`);
-    // };
+    const handleMinChange = (e) => {
+        const newMin = parseInt(e.target.value, 10);
+        if (newMin <= filters.priceRange[1]) {
+            setFilters({ ...filters, priceRange: [newMin, filters.priceRange[1]] });
+        }
+    };
+
+    const handleMaxChange = (e) => {
+        const newMax = parseInt(e.target.value, 10);
+        if (newMax >= filters.priceRange[0]) {
+            setFilters({ ...filters, priceRange: [filters.priceRange[0], newMax] });
+        }
+    };
+
+    // if (minMaxPrice.minPrice === minMaxPrice.maxPrice) {
+    //     return <div className="loading-popup d-flex justify-content-center align-items-center bg-gray" style={{ height: "100vh" }}>
+    //         <div className="d-flex justify-content-center align-items-center ">
+    //             <div className="spinner-border " role="status">
+    //                 <span className="">Loading...</span>
+    //             </div>
+    //         </div>
+    //     </div>;
+
+    // }
+
+    // Clear filters
+    const clearFilters = () => {
+        setFilters({
+            airline: "", stops: null, selectedTimeSlot: "",
+            priceRange: [minMaxPrice.minPrice, minMaxPrice.maxPrice], // Reset price range to default
+        });
+
+        setFilteredFlights(flights); // Reset to all flights
+    };
 
 
     return (
         <>
-            <Layout   title={" ZIIPL | Search Results"}>
-                {loading ? (
+            <Layout title={" ZIIPL | Search Results"}>
+
+
+                {errorCode ? (
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                        <p style={{ color: "red", fontSize: "18px" }}>{errorCode}</p>
+                    </div>
+                ) : loading ? (
                     <div className="loading-popup d-flex justify-content-center align-items-center bg-gray" style={{ height: "100vh" }}>
                         <div className="d-flex justify-content-center align-items-center ">
                             <div className="spinner-border " role="status">
@@ -109,8 +174,14 @@ const SearchResults = () => {
                 ) : (
                     <div className="filtercontainer">
                         <div className="sidefilterbar">
-                            <div>
+                            <div className="text-center">
                                 <h4 style={{ textAlign: 'center', padding: '1px', fontWeight: 500 }}>FILTER</h4>
+                                <button
+                                    className=" btn btn-warning  border-0 text-dark shadow text-center"
+                                    onClick={clearFilters}
+                                >
+                                    Clear All Filters
+                                </button>
                                 <hr />
                             </div>
 
@@ -131,24 +202,13 @@ const SearchResults = () => {
                                         }
                                     >
                                         <option value="">All</option>
-                                        <option value="1">Non-stop</option>
-                                        <option value="2">1 Stop</option>
-                                        <option value="3">2+ Stops</option>
+                                        <option value="0">Non-stop</option>
+                                        <option value="1">1 Stop</option>
+                                        <option value="2">2+ Stops</option>
 
                                     </select>
                                 </div>
-                                {/* {filteredFlights.map((r, index) => (
 
-                                    <>
-                                        <p>
-                                            <strong>
-                                                {r?.route ? JSON.stringify(Object.keys(r.route).length) : "Route is undefined"}
-                                            </strong> stops
-                                        </p>
-
-                                    </>
-
-                                ))} */}
 
 
 
@@ -157,19 +217,81 @@ const SearchResults = () => {
                             <div className="pricerange">
 
 
-                                <input
-                                    type="range"
-                                    min={10}
-                                    max={5000}
-                                    value={filters.priceRange[10]}
-                                    onChange={(e) =>
-                                        setFilters({
-                                            ...filters,
-                                            priceRange: [parseInt(e.target.value, 10), filters.priceRange[1]],
-                                        })
-                                    }
-                                />
-                                <p>up to: {filters.priceRange[1]}</p>
+                                <div style={{ width: "250px", margin: "20px auto" }}>
+                                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                        <span className="fs-6 fw-normal"> {currency}  {filters.priceRange[0]}</span>
+                                        <span className="fs-6 fw-normal"> {currency}  {filters.priceRange[1]}</span>
+                                    </div>
+                                    <div style={{ position: "relative", height: "30px" }}>
+                                        {/* Track */}
+                                        <div
+                                            style={{
+                                                position: "absolute",
+                                                top: "20px",
+                                                left: "0",
+                                                right: "0",
+                                                height: "6px",
+                                                background: "#ddd",
+                                                borderRadius: "5px",
+
+                                            }}
+                                        />
+                                        {/* Range Highlight */}
+                                        <div
+                                            style={{
+                                                position: "absolute",
+                                                top: "20px",
+                                                left: `${((filters.priceRange[0] - minMaxPrice.minPrice) / (minMaxPrice.maxPrice - minMaxPrice.minPrice)) * 100}%`,
+                                                right: `${100 - ((filters.priceRange[1] - minMaxPrice.minPrice) / (minMaxPrice.maxPrice - minMaxPrice.minPrice)) * 100}%`,
+                                                height: "6px",
+                                                background: "#007aff",
+                                                borderRadius: "5px",
+                                                border: "1px solid red solid",
+                                            }}
+                                        />
+                                        {/* Minimum slider */}
+                                        <input
+                                            type="range"
+                                            min={minMaxPrice.minPrice}
+                                            max={minMaxPrice.maxPrice}
+                                            value={filters.priceRange[0]}
+                                            onChange={handleMinChange}
+                                            style={{
+                                                position: "absolute",
+                                                top: "10px",
+                                                zIndex: "2",
+                                                width: "100%",
+                                                pointerEvents: "auto",
+                                                appearance: "none",
+                                            }}
+                                        />
+                                        {/* Maximum slider */}
+                                        <input
+                                            type="range"
+                                            min={minMaxPrice.minPrice}
+                                            max={minMaxPrice.maxPrice}
+                                            value={filters.priceRange[1]}
+                                            onChange={handleMaxChange}
+                                            style={{
+                                                position: "absolute",
+                                                top: "10px",
+                                                zIndex: "2",
+                                                width: "100%",
+                                                height: "16px",
+                                                borderRadius: "11px",
+                                                pointerEvents: "auto",
+                                                appearance: "none",
+                                                backgroundImage: 'linear-gradient(135deg, #92FFC0 10%, #002661 100%)',
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                {/* 
+                                <div className="d-flex gap-1">
+                                    <p>Min:${filters.priceRange[0]}</p>
+                                    <p>Max:${filters.priceRange[1]
+                                    }</p>
+                                </div> */}
 
                             </div>
 
@@ -220,23 +342,23 @@ const SearchResults = () => {
                                                         style={{ fontSize: "12px" }}
                                                         className="float-right text-dark"
                                                     >
-                                                        ${flight?.fare?.adults}
+                                                        {currency}  {convertPrice(flight?.fare?.adults, currency)}
                                                     </span>
                                                 </label>
                                             </div>
                                         </li>
                                     ))}
                                 </ul>
-                                <button onClick={() => setShowAll(!showAll)}>
+                                <button className="btn btn-warning" onClick={() => setShowAll(!showAll)}>
                                     {showAll ? "Show Less" : "Show All"}
                                 </button>
                             </div>
-                            <button
+                            {/* <button
                                 className=" btn btn-warning  border-0 text-dark shadow text-center"
-                                onClick={() => window.location.reload()}
+                                onClick={clearFilters}
                             >
                                 Clear All Filters
-                            </button>
+                            </button> */}
                         </div>
 
                         <div>
@@ -285,8 +407,11 @@ const SearchResults = () => {
                                                 <hr />
                                                 <p>
                                                     <strong>
-                                                        {flight?.route ? JSON.stringify(Object.keys(flight.route).length) : "Route is undefined"}
-                                                    </strong> stops
+                                                        {flight?.route && Object.keys(flight.route).length === 1
+                                                            ? "Non Stops"
+                                                            : Object.keys(flight.route).length - 1}
+                                                    </strong>
+
                                                 </p>
                                             </div>
                                             <div className="flight4">
@@ -305,8 +430,11 @@ const SearchResults = () => {
                                                 <p>Chattrpati Shivaji (T-1)</p>
                                             </div>
                                             <div className="flight5">
-                                                <p className="text-center m-0 p-0">${flight?.fare?.adults}</p>
-                                                <Link to={`/flight-details/${flight.id}`} state={{ flight }} className="btn btn-primary">
+                                                <p className="text-center m-0 p-0">
+                                                    {currency} {convertPrice(flight?.fare?.adults, currency)}
+                                                </p>
+
+                                                <Link to={`/flight-details/${flight.id}`} state={{ flight, location }} className="btn btn-primary">
                                                     Book Now
                                                 </Link>
                                             </div>
@@ -315,7 +443,7 @@ const SearchResults = () => {
                                 ))
                             ) : (
                                 <div className=" d-flex justify-content-center align-items-center bg-gray" style={{ height: "100vh" }}>
-                                    <h3 className="text-center fw-bold text-warning">Sorry! There is no flight available on this Filter Range...</h3>
+                                    <h3 className="text-center fw-bold text-warning">Sorry! There is no flight available on this Route...</h3>
                                 </div>
                             )}
 

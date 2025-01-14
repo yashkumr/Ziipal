@@ -32,6 +32,7 @@ const generateOtp = () => {
 
 const createOtp = async (email) => {
   const otp = generateOtp();
+  
   const expiresAt = new Date(Date.now() + process.env.OTP_EXPIRATION * 60000);
 
   const otpData = new OTP({

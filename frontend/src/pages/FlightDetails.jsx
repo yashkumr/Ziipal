@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { MdElderlyWoman } from "react-icons/md";
 import { IoMan } from "react-icons/io5";
 import { FaChild } from "react-icons/fa";
-// import Popup from "./popup";
 import Layout from '../components/Layout/Layout'
 import { RiFlightTakeoffLine } from "react-icons/ri";
 import Popup from "../components/popup";
 import { useLocation, useParams } from "react-router-dom";
-
-
 import { MdOutlineContactPhone } from "react-icons/md";
 import { IoArrowBack } from "react-icons/io5";
-
-
 import { IoIosCard } from "react-icons/io";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { CurrencyContext } from "../context/CurrencyContext";
 
 
 const FlightDetails = () => {
+
+    const { currency, convertPrice } = useContext(CurrencyContext);
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -49,6 +47,25 @@ const FlightDetails = () => {
     const { id } = useParams();
     const location = useLocation();
     const flight = location.state?.flight || [];
+   
+
+
+   
+ 
+
+    // const searchData = location?.state?.location?.search
+    // console.log(searchData?.split('&')[0].split('=')[1]);
+    const params = new URLSearchParams(location?.state?.location?.search);
+    const adt = params.get("adults");
+    const ift = params.get("infants");
+    const chd = params.get("children");
+
+    const grandTotal = Number(convertPrice(flight?.fare?.adults * adt, currency)) + Number(convertPrice(flight?.fare?.infants * ift, currency)) + Number(convertPrice(flight?.fare?.children * chd, currency));
+    
+    console.log(grandTotal);
+    console.log(typeof convertPrice(flight?.fare?.adults * adt, currency)); // Should be "number"
+
+    // {convertPrice(flight?.fare?.adults, currency)}
 
 
 
@@ -67,11 +84,11 @@ const FlightDetails = () => {
         e.preventDefault()
         try {
            
-            const finalData = { ...formData, flight };
+            const finalData = { ...formData, flight,grandTotal, adt, ift, chd };
             const { data } = await axios.post('/api/v1/flights/travel/getbill', finalData);
-            console.log('Form submitted:', data);
-            setPopup(true);
+            // console.log( data);
             toast.success("Form submitted successfully!");
+            setPopup(true);
 
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -327,7 +344,7 @@ const FlightDetails = () => {
 
 
                                             <div className="my-4">
-                                                <button type="submit" value="submit" >Submit now</button>
+                                                <button className="btn btn-primary" type="submit" value="submit" >Submit now</button>
                                             </div>
                                         </div>
 
@@ -339,32 +356,30 @@ const FlightDetails = () => {
                                         <h2>Price Summary</h2>
                                         <div className="menpersonality">
                                             <MdElderlyWoman />
-                                            <span>1</span>
+                                            <span>{adt}</span>
                                             <IoMan />
-                                            <span>0</span>
+                                            <span>{chd}</span>
                                             <FaChild />
-                                            <span>0</span>
+                                            <span>{ift}</span>
                                         </div>
                                     </div>
                                     <div className="pricechart">
-                                        <p>Adult x 1</p>
-                                        <p>$&nbsp; {flight?.fare?.adults}</p>
+                                        <p>Adult x {adt}</p>
+                                        {/* <p>$&nbsp; {flight?.fare?.adults * adt}</p> */}
+                                        <p> {currency} {convertPrice(flight?.fare?.adults *adt, currency)}</p>
                                     </div>
                                     <div className="pricechart">
-                                        <p>man x 0</p>
-                                        <p>$&nbsp; 0.000</p>
+                                        <p>Infant x {ift}</p>
+                                        <p> {currency} {convertPrice(flight?.fare?.infants * ift, currency)} </p>
                                     </div>
                                     <div className="pricechart">
-                                        <p>Child x 0</p>
-                                        <p>$&nbsp; 0.000</p>
+                                        <p>Child x {chd}</p>
+                                        <p> {currency}  {convertPrice(flight?.fare?.children * chd, currency)} </p>
                                     </div>
-                                    <div className="pricechart">
-                                        <p>Total Taxes</p>
-                                        <p>$&nbsp; {flight?.fare?.adults}</p>
-                                    </div>
+                                    
                                     <div className="pricechart">
                                         <strong className="text-danger fs-4">Grand Total</strong>
-                                        <span className="text-danger fs-4">$ {flight?.fare?.adults}</span>
+                                        <span className="text-danger fs-4">{currency} {grandTotal.toFixed()}</span>
                                     </div>
                                 </div>
 

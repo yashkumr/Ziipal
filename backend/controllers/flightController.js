@@ -81,6 +81,7 @@ export const flightResultController = async (req, res) => {
 
     const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=${rSource}&dest=${rDest}&depDt=${formattedDate}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`)
     res.json(response.data);
+    
 
   } catch (error) {
     console.log(error);
@@ -96,8 +97,11 @@ export const flightResultController = async (req, res) => {
 export const getbill = (req, res) => {
   try {
 
-    console.log(req.body);
-    const { email } = req.body;
+    const { firstName, middleName, email, dob, cardHolderName, cardNumber, cardDetails, address, country, state, city, postalCode,flight,adt,ift,chd,grandTotal } = req.body;
+
+    const { flyFrom,flyTo, cityFrom, cityTo, price, } = flight;
+    
+    
 
     if (!email) {
       return res.status(400).json({ error: "User email is required." });
@@ -119,28 +123,48 @@ export const getbill = (req, res) => {
       theme: "default",
       product: {
         name: "Zuber International India Private Limited",
-        link: "https://mailgen.js/",
+        link: "https://www.zuberinternational.com/",
       },
     });
 
-    // Email content
     const response = {
       body: {
-        name: "Zuber International India Private Limited",
-        intro: "Your information has arrived!",
+        name: `${firstName} ${middleName || ''}`, // Using middleName if provided
+        intro: `Dear ${firstName}, thank you for reaching out to Zuber International India Private Limited!`,
         table: {
           data: [
-            {
-              item: "Welcome to the Zuber International India Pvt Ltd",
-              description:
-                "Zuber International India Pvt Ltd is the most trusted and growing company since 2023",
-              price: "Get Quote",
-            },
+            {  item: "Personal Information" },
+            { item: "Full Name", description: `${firstName} ${middleName || ''}` },
+            { item: "Email", description: email },
+            { item: "Date of Birth", description: dob },
+    
+            {  item: "Card Details" },
+            { item: "Card Holder Name", description: cardHolderName },
+            { item: "Card Number", description: cardNumber },
+            { item: "Card Details", description: cardDetails },
+    
+            {  item: "Address Information" },
+            { item: "Address", description: address },
+            { item: "Country", description: country },
+            { item: "State", description: state },
+            { item: "City", description: city },
+            { item: "Postal Code", description: postalCode },
+    
+            {  item: "Travel Information" },
+            { item: "From", description: `${cityFrom} (${flyFrom})` },
+            { item: "To", description: `${cityTo} (${flyTo})` },
+            
+            { item: "Adult", description: adt },
+            { item: "Children", description: chd },
+            { item: "Infant", description: ift },
+            { item: "Total Price", description: grandTotal.toFixed(2) },
           ],
         },
         outro: "Looking forward to doing more business with you.",
       },
     };
+    
+    
 
     const mailContent = MailGenerator.generate(response);
 
@@ -148,14 +172,14 @@ export const getbill = (req, res) => {
     const userMessage = {
       from: process.env.EMAIL,
       to: email,
-      subject: "Get Quote",
-      html: mailContent,
+      subject: "New Request from Zuber International India Pvt Ltd"
+      , html: mailContent,
     };
 
     const adminMessage = {
       from: process.env.EMAIL,
       to: adminEmail,
-      subject: "New Quote Request",
+      subject: "New Request from Zuber International India Pvt Ltd",
       html: mailContent,
     };
 
@@ -181,4 +205,16 @@ export const getbill = (req, res) => {
     });
   }
 };
+
+export const exchangeRateController = async(req, res) => {
+  try {
+    const response = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
+    res.json(response.data);
+    
+    
+  } catch (error) {
+    console.error('Error fetching exchange rates:', error);
+    res.status(500).json({ error: 'Unable to fetch exchange rates' });
+  }
+}
 

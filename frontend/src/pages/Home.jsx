@@ -17,6 +17,7 @@ import { format } from "date-fns";
 import { FaExchangeAlt } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
+import CurrencySelector from '../components/CurrencySelector.jsx'
 
 
 const Home = () => {
@@ -59,6 +60,7 @@ const Home = () => {
   };
   const handleSuggestionClick = (location) => {
     setKeyword(location);
+    console.log(location);
     setShowSuggestions(false);
 
   };
@@ -82,6 +84,8 @@ const Home = () => {
   };
   const handleSuggestionClick2 = (location) => {
     setDkeyword(location);
+    console.log("destinattion");
+    console.log(location);
     setShowSuggestions(false);
 
   };
@@ -198,16 +202,16 @@ const Home = () => {
                                       <button className="nav-link active" id="oneway-tab" data-bs-toggle="tab" data-bs-target="#oneway_flight" type="button" role="tab" aria-controls="oneway_flight" aria-selected="true">One Way
                                       </button>
                                     </li>
-                                    <li className="nav-item" role="presentation">
+                                    {/* <li className="nav-item" role="presentation">
                                       <button className="nav-link" id="roundtrip-tab" data-bs-toggle="tab" data-bs-target="#roundtrip" type="button" role="tab" aria-controls="roundtrip" aria-selected="false">Roundtrip
                                       </button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
+                                    </li> */}
+                                    {/* <li class="nav-item" role="presentation">
                                       <button class="nav-link" id="multi_city-tab" data-bs-toggle="tab"
                                         data-bs-target="#multi_city" type="button" role="tab"
                                         aria-controls="multi_city" aria-selected="false">Multi city
                                       </button>
-                                    </li>
+                                    </li> */}
                                   </ul>
                                 </div>
                               </div>
@@ -1923,8 +1927,8 @@ const Home = () => {
                 </li>
 
                 <li className='eZlSok'>
-                  <span className='kbXnxm'>
-                    <span> BHD</span> <span className='bBRZdk rYfcy'> </span> </span>
+                  <span className='kbXnxm cursor-pointer'>
+                     <CurrencySelector/>  </span>
                 </li>
               </ul>
             </div>

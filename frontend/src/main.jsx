@@ -6,15 +6,19 @@ import { AuthProvider } from './context/Auth.jsx'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FlightProvider } from './context/FlightContext.jsx'
+import { CurrencyProvider } from './context/CurrencyContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
 
-  <AuthProvider>
-    <FlightProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </FlightProvider>
+<AuthProvider>
+  <CurrencyProvider>
+    
+      <FlightProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </FlightProvider>
+  </CurrencyProvider>
   </AuthProvider>
 )
