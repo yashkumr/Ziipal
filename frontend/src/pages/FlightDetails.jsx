@@ -76,7 +76,7 @@ const FlightDetails = () => {
 
 
     };
-
+    const finalData = { ...formData, flight,grandTotal, adt, ift, chd };
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -84,11 +84,11 @@ const FlightDetails = () => {
         e.preventDefault()
         try {
            
-            const finalData = { ...formData, flight,grandTotal, adt, ift, chd };
+            
             const { data } = await axios.post('/api/v1/flights/travel/getbill', finalData);
             // console.log( data);
-            toast.success("Form submitted successfully!");
-            setPopup(true);
+            toast.success(data.message || "Form submitted successfully!");
+            // setPopup(true);
 
         } catch (error) {
             console.error('Error submitting form:', error);

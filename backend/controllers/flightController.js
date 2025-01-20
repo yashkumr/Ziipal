@@ -71,16 +71,33 @@ export const flightResultController = async (req, res) => {
 
   try {
 
-    const { source, destination, date, adults, children, infants, class: travelClass } = req.query;
+    const { source, destination, date, adults, children, infants,rtnDate,trpType, class: travelClass } = req.query;
+    
+
     const rSource = source.split('-')[0]
     const rDest = destination.split('-')[0]
     const formattedDate = moment(date, "YYYY-MM-DD").format("MMM-DD-YYYY");
+    const returnDate = moment(rtnDate, "YYYY-MM-DD").format("MMM-DD-YYYY");
+
+     let apiUrl = `https://cloudapi.wikiproject.in/flight/?currency=USD&JType=${trpType}&org=${rSource}&dest=${rDest}&depDt=${formattedDate}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`;
+
+     // Include return date for roundtrip
+     if (trpType === "roundtrip" && returnDate) {
+       apiUrl += `&retDt=${returnDate}`;
+     }
+ 
+     
+
+     const response = await axios.get(apiUrl);
+
+     res.json(response.data);
+     
 
     // https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=DEL&dest=BLR&depDt=Dec-30-2024&adt=1&chd=0&inf=0&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100
     // const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=DEL&dest=BLR&depDt=${date}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`);
 
-    const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=oneway&org=${rSource}&dest=${rDest}&depDt=${formattedDate}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`)
-    res.json(response.data);
+    // const response = await axios.get(`https://cloudapi.wikiproject.in/flight/?currency=USD&JType=${trpType}&org=${rSource}&dest=${rDest}&depDt=${formattedDate}&adt=${adults}&chd=${children}&inf=${infants}&ct=M&userid=dash&password=JMD5fky8&metaId=2020&website=baratoflight&limit=100`)
+    // res.json(response.data);
     
 
   } catch (error) {

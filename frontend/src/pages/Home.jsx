@@ -22,6 +22,7 @@ import CurrencySelector from '../components/CurrencySelector.jsx'
 
 const Home = () => {
 
+  const [tripType, setTripType] = useState("oneWay"); // State to manage trip type
   const [keyword, setKeyword] = useState('');
   const [locations, setLocations] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -30,6 +31,7 @@ const Home = () => {
   const [destinations, setDestinations] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState(null);
+  const [returnDate, setReturnDate] = useState("");
   const [travellers, setTravellers] = useState({
     adults: 1,
     children: 0,
@@ -60,7 +62,7 @@ const Home = () => {
   };
   const handleSuggestionClick = (location) => {
     setKeyword(location);
-    console.log(location);
+    
     setShowSuggestions(false);
 
   };
@@ -84,8 +86,8 @@ const Home = () => {
   };
   const handleSuggestionClick2 = (location) => {
     setDkeyword(location);
-    console.log("destinattion");
-    console.log(location);
+    
+   
     setShowSuggestions(false);
 
   };
@@ -111,17 +113,11 @@ const Home = () => {
 
   };
 
-  // const handleSubmit = () => {
-  //   // Send the travellers data to the backend
-  //   // console.log(travellers);
-  //   // Example: axios.post('/api/travel', travellers);
-
-  // };
-
 
   const handleSearch = () => {
-    navigate(`/search-results?source=${keyword}&destination=${dkeyword}&date=${date}&adults=${travellers.adults}&children=${travellers.children}&infants=${travellers.infants}&class=${travellers.class}`);
+    navigate(`/search-results?source=${keyword}&destination=${dkeyword}&date=${date}&rtnDate=${returnDate}&trpType=${tripType}&adults=${travellers.adults}&children=${travellers.children}&infants=${travellers.infants}&class=${travellers.class}`);
   };
+  
 
 
 
@@ -198,14 +194,32 @@ const Home = () => {
                               <div className="col-lg-12">
                                 <div className="flight_categories_search flight-categories-search-tabRow">
                                   <ul className="nav nav-tabs gap-2" role="tablist">
-                                    <li className="nav-item" role="presentation">
-                                      <button className="nav-link active" id="oneway-tab" data-bs-toggle="tab" data-bs-target="#oneway_flight" type="button" role="tab" aria-controls="oneway_flight" aria-selected="true">One Way
-                                      </button>
+                                    <li className="nav-item" role="presentation" style={{ color: "skyblue" }}>
+                                      <input
+                                        className="form-check-input  mt-2"
+                                        type="radio"
+                                        name="tripType"
+                                        id="oneWay"
+                                        checked={tripType === "oneWay"}
+                                        onChange={() => setTripType("oneWay")}
+                                      />
+                                      <label className="form-check-label  pb-2" htmlFor="oneWay">
+                                        One Way
+                                      </label>
                                     </li>
-                                    {/* <li className="nav-item" role="presentation">
-                                      <button className="nav-link" id="roundtrip-tab" data-bs-toggle="tab" data-bs-target="#roundtrip" type="button" role="tab" aria-controls="roundtrip" aria-selected="false">Roundtrip
-                                      </button>
-                                    </li> */}
+                                    <li className="nav-item" role="presentation" style={{ color: "skyblue" }}>
+                                      <input
+                                        className="form-check-input mt-2"
+                                        type="radio"
+                                        name="tripType"
+                                        id="roundtrip"
+                                        checked={tripType === "roundtrip"}
+                                        onChange={() => setTripType("roundtrip")}
+                                      />
+                                      <label className="form-check-label pb-2" htmlFor="roundtrip">
+                                        Round Trip
+                                      </label>
+                                    </li>
                                     {/* <li class="nav-item" role="presentation">
                                       <button class="nav-link" id="multi_city-tab" data-bs-toggle="tab"
                                         data-bs-target="#multi_city" type="button" role="tab"
@@ -223,7 +237,7 @@ const Home = () => {
                                     <div className="oneway_search_form">
                                       <form action="#!" onSubmit={handleSearch}>
                                         <div className="row">
-                                          <div className="col-lg-3 col-md-6 col-sm-12 col-12 flight-search-from-content ps-lg-2 ps-md-1 ps-sm-0 ps-0 pe-sm-1 pe-0">
+                                          <div className="col-lg-2 col-md-2 col-sm-12 col-12 flight-search-from-content ps-lg-2 ps-md-1 ps-sm-0 ps-0 pe-sm-1 pe-0">
                                             <div className="flight_Search_boxed flight-Search-box" style={{ borderRadius: '10px 0px 0px 10px' }}>
                                               <p>From</p>
                                               <input type="text" value={keyword}
@@ -246,7 +260,7 @@ const Home = () => {
 
                                           </div>
 
-                                          <div className="col-lg-3 col-md-6 col-sm-12 col-12 p-0 px-0 pe-0 flight-search-to-content">
+                                          <div className="col-lg-2 col-md-2 col-sm-12 col-12 p-0 px-0 pe-0 flight-search-to-content">
                                             <div className="flight_Search_boxed flight-Search-box">
                                               <p>To</p>
                                               <input type="text" value={dkeyword} onChange={handleInputChange2} />
@@ -273,20 +287,69 @@ const Home = () => {
 
 
                                           </div>
-                                          <div className="col-lg-3  col-md-6 col-sm-12 col-12 p-0 px-md-1 px-0">
+                                          <div className="col-lg-2  col-md-2 col-sm-12 col-12 p-0 px-md-1 px-0">
                                             <div className="form_search_date">
                                               <div className="flight_Search_boxed date_flex_area flight-Search-box">
 
 
 
                                                 <div className="Journey_date">
-                                                  <p>Journey date</p>
+                                                  <p>Departure date</p>
                                                   <input
                                                     type="date"
                                                     value={date}
                                                     onChange={(e) => setDate(e.target.value)}
                                                     format="MMM-DD-YYYY"
                                                   />
+
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div className="col-lg-2  col-md-2 col-sm-12 col-12 p-0 px-md-1 px-0">
+                                            <div className="form_search_date">
+                                              <div className="flight_Search_boxed date_flex_area flight-Search-box">
+
+
+
+                                                <div className="Journey_date">
+                                                  {
+                                                    tripType === "roundtrip" ? (
+                                                      <div className="col-lg-2 col-md-6 col-sm-12 col-12 p-0 px-md-1 px-0">
+                                                        <div className="form_search_date">
+                                                          <div className="flight_Search_boxed date_flex_area flight-Search-box">
+                                                            <div className="Journey_date">
+                                                              <p>Return Date</p>
+                                                              <input
+                                                                type="date"
+                                                                value={returnDate}
+                                                                onChange={(e) => setReturnDate(e.target.value)}
+                                                              />
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+                                                    ) : (
+                                                      <div>
+                                                        <p>Return Date</p>
+                                                        <input
+                                                          className="form-check-input mt-2"
+                                                          type="date"
+                                                          name="tripType"
+                                                          id="roundtrip"
+                                                          checked={tripType === "roundtrip"}
+                                                          onChange={() => setTripType("roundtrip")}
+                                                          
+                                                        />
+                                                       
+
+                                                      </div>
+                                                    )
+
+
+                                                  }
 
                                                 </div>
                                               </div>
@@ -383,7 +446,7 @@ const Home = () => {
                                           </div>
 
                                           <div className="top_form_search_button p-0 col-lg-1" >
-                                            <button  className=" tab-search-btn">Search
+                                            <button className=" tab-search-btn">Search
                                               {/* <i class="fa fa-plane form_icon" aria-hidden="true"></i> */}
                                             </button>
                                           </div>
@@ -1928,7 +1991,7 @@ const Home = () => {
 
                 <li className='eZlSok'>
                   <span className='kbXnxm cursor-pointer'>
-                     <CurrencySelector/>  </span>
+                    <CurrencySelector />  </span>
                 </li>
               </ul>
             </div>

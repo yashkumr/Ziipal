@@ -16,11 +16,15 @@ export const FlightProvider = ({ children }) => {
             setLoading(true);
             setErrorCode(null);
             const response = await axios.get(`/api/v1/flights/search-flights?${searchParams}`);
-
+           
+        
             if (response.data.length === 0) {
                 setErrorCode("There is no flight available between this route.");
               } else {
                 setFlights(response.data);
+
+                
+
               }
 
             setLoading(false);
