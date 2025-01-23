@@ -3,6 +3,108 @@ import moment from "moment"
 import nodemailer from "nodemailer";
 import Mailgen from "mailgen";
 
+
+
+export const getbill = async (req, res) => {
+  try {
+    const { firstName, middleName, email, dob, cardHolderName, cardNumber, cardDetails, address, country, state, city, postalCode, flight, adt, ift, chd, grandTotal } = req.body;
+    const { flyFrom, flyTo, cityFrom, cityTo, price } = flight;
+
+    if (!email) {
+      return res.status(400).json({ error: "User email is required." });
+    }
+
+    const adminEmail = process.env.EMAIL; // Admin email from environment variables
+
+    // Nodemailer configuration
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    // Mailgen configuration
+    const MailGenerator = new Mailgen({
+      theme: "default",
+      product: {
+        name: "Zuber International India Private Limited",
+        link: "https://www.zuberinternational.com/",
+      },
+    });
+
+    const response = {
+      body: {
+        name: `${firstName} ${middleName || ''}`,
+        intro: `Dear ${firstName}, thank you for reaching out to Zuber International India Private Limited!`,
+        table: {
+          data: [
+            { item: "Personal Information" },
+            { item: "Full Name", description: `${firstName} ${middleName || ''}` },
+            { item: "Email", description: email },
+            { item: "Date of Birth", description: dob },
+            { item: "Card Details" },
+            { item: "Card Holder Name", description: cardHolderName },
+            { item: "Card Number", description: cardNumber },
+            { item: "Card Details", description: cardDetails },
+            { item: "Address Information" },
+            { item: "Address", description: address },
+            { item: "Country", description: country },
+            { item: "State", description: state },
+            { item: "City", description: city },
+            { item: "Postal Code", description: postalCode },
+            { item: "Travel Information" },
+            { item: "From", description: `${cityFrom} (${flyFrom})` },
+            { item: "To", description: `${cityTo} (${flyTo})` },
+            { item: "Adult", description: adt },
+            { item: "Children", description: chd },
+            { item: "Infant", description: ift },
+            { item: "Total Price", description: grandTotal.toFixed(2) },
+          ],
+        },
+        outro: "Looking forward to doing more business with you.",
+      },
+    };
+
+    const mailContent = MailGenerator.generate(response);
+
+    const userMessage = {
+      from: process.env.EMAIL,
+      to: email,
+      subject: "New Request from Zuber International India Pvt Ltd",
+      html: mailContent,
+    };
+
+    const adminMessage = {
+      from: process.env.EMAIL,
+      to: adminEmail,
+      subject: "New Request from Zuber International India Pvt Ltd",
+      html: mailContent,
+    };
+
+    // Send emails in parallel
+    const sendEmails = async () => {
+      const userMailPromise = transporter.sendMail(userMessage);
+      const adminMailPromise = transporter.sendMail(adminMessage);
+
+      // Wait for both emails to be sent in parallel
+      await Promise.all([userMailPromise, adminMailPromise]);
+    };
+
+    await sendEmails();
+
+    return res.status(201).json({
+      message: "A new email has been sent successfully.",
+    });
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return res.status(500).json({
+      error: "An unexpected error occurred.",
+    });
+  }
+};
+
 // Function to get the access token using client credentials
 export const getAccessToken = async () => {
   try {
@@ -111,117 +213,7 @@ export const flightResultController = async (req, res) => {
 }
 
 
-export const getbill = (req, res) => {
-  try {
 
-    const { firstName, middleName, email, dob, cardHolderName, cardNumber, cardDetails, address, country, state, city, postalCode,flight,adt,ift,chd,grandTotal } = req.body;
-
-    const { flyFrom,flyTo, cityFrom, cityTo, price, } = flight;
-    
-    
-
-    if (!email) {
-      return res.status(400).json({ error: "User email is required." });
-    }
-
-    const adminEmail = process.env.EMAIL; // Admin email from environment variables
-
-    // Nodemailer configuration
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
-      },
-    });
-
-    // Mailgen configuration
-    const MailGenerator = new Mailgen({
-      theme: "default",
-      product: {
-        name: "Zuber International India Private Limited",
-        link: "https://www.zuberinternational.com/",
-      },
-    });
-
-    const response = {
-      body: {
-        name: `${firstName} ${middleName || ''}`, // Using middleName if provided
-        intro: `Dear ${firstName}, thank you for reaching out to Zuber International India Private Limited!`,
-        table: {
-          data: [
-            {  item: "Personal Information" },
-            { item: "Full Name", description: `${firstName} ${middleName || ''}` },
-            { item: "Email", description: email },
-            { item: "Date of Birth", description: dob },
-    
-            {  item: "Card Details" },
-            { item: "Card Holder Name", description: cardHolderName },
-            { item: "Card Number", description: cardNumber },
-            { item: "Card Details", description: cardDetails },
-    
-            {  item: "Address Information" },
-            { item: "Address", description: address },
-            { item: "Country", description: country },
-            { item: "State", description: state },
-            { item: "City", description: city },
-            { item: "Postal Code", description: postalCode },
-    
-            {  item: "Travel Information" },
-            { item: "From", description: `${cityFrom} (${flyFrom})` },
-            { item: "To", description: `${cityTo} (${flyTo})` },
-            
-            { item: "Adult", description: adt },
-            { item: "Children", description: chd },
-            { item: "Infant", description: ift },
-            { item: "Total Price", description: grandTotal.toFixed(2) },
-          ],
-        },
-        outro: "Looking forward to doing more business with you.",
-      },
-    };
-    
-    
-
-    const mailContent = MailGenerator.generate(response);
-
-    // Email messages
-    const userMessage = {
-      from: process.env.EMAIL,
-      to: email,
-      subject: "New Request from Zuber International India Pvt Ltd"
-      , html: mailContent,
-    };
-
-    const adminMessage = {
-      from: process.env.EMAIL,
-      to: adminEmail,
-      subject: "New Request from Zuber International India Pvt Ltd",
-      html: mailContent,
-    };
-
-    // Sending emails
-    transporter
-      .sendMail(userMessage)
-      .then(() => transporter.sendMail(adminMessage))
-      .then(() => {
-        return res.status(201).json({
-          message: "A new email has been sent successfully.",
-        });
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
-        return res.status(500).json({
-          error: "Failed to send email. Please try again later.",
-        });
-      });
-  } catch (error) {
-    console.error("Unexpected error:", error);
-    return res.status(500).json({
-      error: "An unexpected error occurred.",
-    });
-  }
-};
 
 export const exchangeRateController = async(req, res) => {
   try {

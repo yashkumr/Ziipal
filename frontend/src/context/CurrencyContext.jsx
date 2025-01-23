@@ -15,7 +15,7 @@ export const CurrencyProvider = ({ children }) => {
       try {
         const response = await axios.get('/api/v1/flights/exchange-rates');
         setRates(response.data.rates);
-        console.log('Exchange rates:', response.data.rates);
+        
       } catch (error) {
         console.error('Error fetching exchange rates:', error);
       }
@@ -30,7 +30,7 @@ export const CurrencyProvider = ({ children }) => {
   };
 
   return (
-    <CurrencyContext.Provider value={{ currency, setCurrency, convertPrice }}>
+    <CurrencyContext.Provider value={{ currency,rates, setCurrency, convertPrice }}>
       {children}
     </CurrencyContext.Provider>
   );

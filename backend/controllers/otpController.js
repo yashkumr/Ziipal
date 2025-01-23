@@ -2,8 +2,6 @@ import { createOtp, verifyOtp } from '../services/otpService.js';
 
 const requestOtp = async (req, res) => {
   const { email } = req.body;
-  console.log("hello")
-  console.log(email);
 
   try {
     await createOtp(email);
@@ -14,8 +12,7 @@ const requestOtp = async (req, res) => {
 };
 
 const validateOtp = async (req, res) => {
-  const { email, otp } = req.body;
-  console.log(req.body);
+  const { email, otp } = req.body; 
 
   try {
     const isValid = await verifyOtp(email, otp);

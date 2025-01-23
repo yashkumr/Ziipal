@@ -23,7 +23,6 @@ export const FlightProvider = ({ children }) => {
               } else {
                 setFlights(response.data);
 
-                
 
               }
 

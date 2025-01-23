@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-    <Toaster/>
+    <Toaster className="mt-5"/>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/flight-details/:id" element={<FlightDetails />} />
